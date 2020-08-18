@@ -1,0 +1,41 @@
+data models:
+    user:
+        - id(unique) or acc. no.
+        - username(varchar)
+        - password(varchar)
+        - balance(int)
+    transaction history:
+        - transactionID(primary key)(int or varchar or char)
+        - userID1
+        - userID2
+            (use foreign keys)
+            (in case of withdrawals/deposits userID1=userID2=user.id)
+            (amount will determine withdrawal(-ve) or deposit(+ve))
+        - amount(int)(can be -ve in case of withdrawals or deposits)
+        - datetime(datetime)
+
+functions:
+    #-- core/auth.py --#
+    - create user
+    - sign in
+    #-- core/auth.py --#
+
+    #-- core/transfers.py --#
+    - deposit and withdraw money
+    - transfer money to other users
+    #-- core/transfers.py --#
+
+    #-- core/display.py --#
+    - see other users
+    - see transaction history
+        (with other users as well as deposits/withdrawals)
+    #-- core/display.py --#
+
+problems:
+    - how to store deposits and withdraws history properly
+
+optional:
+    - admin user that can see all transaction histories
+    - ability to change password
+    - store salted and hashed passwords
+    - delete user
