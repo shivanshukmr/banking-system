@@ -43,3 +43,4 @@ optional:
     - ability to change password
     - delete user
     - store salted and hashed passwords
+
