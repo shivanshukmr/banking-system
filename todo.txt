@@ -39,3 +39,6 @@ optional:
     - ability to change password
     - store salted and hashed passwords
     - delete user
+
+
+
