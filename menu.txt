@@ -1,0 +1,16 @@
+Bank
+type "help" to list of commands
+>> help
+
+createuser   -   Create new user
+signin       -   Sign in to your account
+...
+...
+
+
+>> signin
+    #-- calls userauthentication function from core/users.py
+
+>> createuser
+    #-- calls usercreation function from core/users.py
+    

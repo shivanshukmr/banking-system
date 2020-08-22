@@ -1,0 +1,16 @@
+SQL:
+
+user1           user2           Withdraw        deposit             datetime                        balance
+shiv            test            1000            NULL                2020-12-31 HH:MM:SS             3000
+shiv            test2           2000            NULL                2020-08-02 HH:MM:SS             4000
+test            shiv            NULL            3000                2020-04-15 HH:MM:SS             6000
+shiv            shiv            1000            NULL                2019-11-13 HH:MM:SS             3000
+
+------------------------------------------------------------------------------------------------------------------------------------
+DISPLAY:
+
+date&time                   Description         Withdrawal          Deposit         Balance
+2020-12-31 HH:MM:SS         test                1000                NULL            3000
+2020-08-02 HH:MM:SS         test2               2000                NULL            4000
+2020-04-15 HH:MM:SS         test                NULL                3000            6000
+2019-11-13 HH:MM:SS         shiv                1000                NULL            3000            
