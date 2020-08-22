@@ -16,7 +16,7 @@ data models:
         - remaining balance
         
 
-functions:
+features:
     #-- core/users.py --#
     - create user
     - sign in

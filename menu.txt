@@ -1,16 +1,33 @@
 Bank
 type "help" to list of commands
->> help
 
-createuser   -   Create new user
-signin       -   Sign in to your account
-...
-...
-
-
->> signin
-    #-- calls userauthentication function from core/users.py
-
->> createuser
-    #-- calls usercreation function from core/users.py
+if notsignin
+{
+    >> help
     
+    createuser   -   Create new user
+    signin       -   Sign in to your account
+    ...
+    ...
+    
+    
+    >> signin
+        #-- calls userauthentication function from core/users.py
+    
+    >> createuser
+        #-- calls usercreation function from core/users.py
+}    
+
+else
+{
+    >> help
+
+    transfer  -  Transfer money to other users
+    deposit   -  Deposit money
+    withdraw  -  Withdraw money
+    balance   -  Show balance
+    details   -  Show all details about you(name, accno., balance)
+    transactionhistory  -  Show transactionhistory
+    getusers  -  Show other users(name, accno.)
+    signout  -  Signout
+}
