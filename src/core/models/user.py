@@ -4,11 +4,11 @@ class User:
         self.username = username
         self.balance = balance
 
-    def getusername(self):
+    def get_accno(self):
+        return self.accno
+
+    def get_username(self):
         return self.username
     
-    def getaccno(self):
-        return self.accno
-    
-    def getbalance(self):
+    def get_balance(self):
         return self.balance
