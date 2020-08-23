@@ -1,16 +1,30 @@
-SQL:
+SQL(storage):
 
-user1           user2           Withdraw        deposit             datetime                        balance
-shiv            test            1000            NULL                2020-12-31 HH:MM:SS             3000
-shiv            test2           2000            NULL                2020-08-02 HH:MM:SS             4000
-test            shiv            NULL            3000                2020-04-15 HH:MM:SS             6000
-shiv            shiv            1000            NULL                2019-11-13 HH:MM:SS             3000
+# gives amt             # gets amt
+User1accno             User2accno         Amount          Datetime                 
+
+shiv.accno              test.accno          1000            2020-12-31 HH:MM:SS      
+shiv.accno              test2.accno         2000            2020-08-02 HH:MM:SS      
+test.accno              shiv.accno          3000            2020-04-15 HH:MM:SS      
+shiv.accno              NULL                1000            2019-11-13 HH:MM:SS      
 
 ------------------------------------------------------------------------------------------------------------------------------------
-DISPLAY:
+DISPLAY(for shiv):
 
-date&time                   Description         Withdrawal          Deposit         Balance
-2020-12-31 HH:MM:SS         test                1000                NULL            3000
-2020-08-02 HH:MM:SS         test2               2000                NULL            4000
-2020-04-15 HH:MM:SS         test                NULL                3000            6000
-2019-11-13 HH:MM:SS         shiv                1000                NULL            3000            
+date&time                   Description                 Withdrawal          Deposit
+2020-12-31 HH:MM:SS         test  : test.accno          1000                NULL
+2020-08-02 HH:MM:SS         test2 : test2.accno         2000                NULL
+2020-04-15 HH:MM:SS         test  : test.accno          NULL                3000
+2019-11-13 HH:MM:SS         shiv                        1000                NULL
+
+
+HOWTO:
+
+select * from transactionhistory where User1accno = shiv.accno OR User2accno = shiv.accno;
+
+if User1accno == NULL:
+    # Deposit
+if User2accno == NULL:
+    # Withdrawal
+else:
+    # transaction b/w two users

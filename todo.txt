@@ -1,20 +1,21 @@
-data models:
+data models(SQL Tables):
     user:
         - acc. no. - 6 digits, auto-increment
         - username(varchar)
         - password(varchar)
         - balance(int)
-    transaction history:
-        - user1-acc.no.
-        - user2-acc.no.
-            (use foreign keys)
-            (in case of withdrawals/deposits userID1=userID2=user.id)
-            (amount will determine withdrawal(-ve) or deposit(+ve))
-        - withdraw
-        - deposit
-        - datetime(datetime)
-        - remaining balance
         
+    transaction history:
+        - user1-accno (balance decreases)
+        - user2-accno (balance increases)
+            (use foreign keys)
+            - in case of withdrawals/deposits
+                - if withdrawal  =>  user1-accno = user.accno(because balance decreases)  &  user2-accno = NULL
+                - if deposit     =>  user1-accno = NULL                                   &  user2-accno = user.accno(because balance increases)
+                (where user is the person withdrawing or depositing)
+        - amount
+        - datetime(datetime)
+
 
 features:
     #-- core/users.py --#
