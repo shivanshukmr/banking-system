@@ -25,7 +25,7 @@ def usercreation():
     name = input("your firstname:")
     lname = input("your lastname:")
 
-    flag = True
+    flag = True  # taking password twice
     while flag:
         for i in range(0, 2):
             if i == 1:
@@ -54,4 +54,24 @@ def userauthentication():
     Gets account no., password and check in db
     returns user object
     '''
-    pass
+
+    flag = False
+    import connector
+    cursor = db.cursor()
+    cursor.execute("select * from users")
+    data = cursor.fetchall()
+
+    while flag:  # user authentication
+        acc = int(input("enter your accno"))
+        passwd = int(input("enter your password"))
+
+        for row in data:
+            # checks every record from column 3(accno) with the users input
+            if row[2] == acc and row[3] == passwd:
+                flag = True
+                break
+            else:
+                print("account no. or the password is wrong")
+                break
+
+    return flag           # user has incorrectly typed in account no. or password
