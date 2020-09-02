@@ -1,3 +1,15 @@
+USERINFO TABLE:
+
+name      lastname    accno      password        datecreated    balance
+*by user  *by user    *given     *by user        *datetime      *according to money deposited and withdrawn
+                      6 digits   -asked twice
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
 SQL(storage):
 
 # gives amt             # gets amt
