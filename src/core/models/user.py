@@ -9,6 +9,6 @@ class User:
 
     def get_username(self):
         return self.username
-    
+
     def get_balance(self):
         return self.balance
