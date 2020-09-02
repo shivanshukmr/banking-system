@@ -12,3 +12,11 @@ db = mysql.connector.connect(
     port=output[1],
     database="bank"
 )
+
+
+def get_DB():
+    return db
+
+
+def get_Cursor():
+    return db.cursor()
