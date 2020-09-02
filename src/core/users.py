@@ -74,4 +74,4 @@ def userauthentication():
                 print("account no. or the password is wrong")
                 break
 
-    return flag           # user has incorrectly typed in account no. or password
+    return flag  # returns true or false
