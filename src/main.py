@@ -1,5 +1,5 @@
 # main file(will contain menu and function calls)
-from core.models.users import users
+from core.models.user import User
 
 
 user = None

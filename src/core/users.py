@@ -5,7 +5,8 @@
 # to create table
 
 #import connector
-#cursor = db.cursor()
+# get_DB()
+#cursor = get_Cursor()
 # query = '''create table users
 #    (name varchar(100) NOT NULL,
 #    lastname varchar(100) NOT NULL,
@@ -43,7 +44,8 @@ def usercreation():
                     flag = True
 
     import connector
-    cursor = db.cursor()
+    get_DB()
+    cursor = get_Cursor()
     query = "insert into users(name, lastname, passwd) values(name, lname, passwd);"
     cursor.execute(query)
     db.commit
@@ -57,7 +59,8 @@ def userauthentication():
 
     flag = False
     import connector
-    cursor = db.cursor()
+    get_DB()
+    cursor = get_Cursor()
     cursor.execute("select * from users")
     data = cursor.fetchall()
 
