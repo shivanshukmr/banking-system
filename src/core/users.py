@@ -4,7 +4,7 @@
 
 # to create table
 
-#import connector
+# from core.db import connector
 # get_DB()
 #cursor = get_Cursor()
 # query = '''create table users
@@ -15,7 +15,7 @@
 #    date_created datetime NOt NULL,
 #    balance int);
 #    '''
-# cursor.execut(query)
+# cursor.execute(query)
 
 
 def usercreation():
@@ -43,7 +43,7 @@ def usercreation():
                     print("password do not match")
                     flag = True
 
-    import connector
+    from db import connector
     get_DB()
     cursor = get_Cursor()
     query = "insert into users(name, lastname, passwd) values(name, lname, passwd);"
@@ -58,7 +58,7 @@ def userauthentication():
     '''
 
     flag = False
-    import connector
+    from db.connector import *
     get_DB()
     cursor = get_Cursor()
     cursor.execute("select * from users")
@@ -78,3 +78,6 @@ def userauthentication():
                 break
 
     return flag  # returns true or false
+
+
+userauthentication()
