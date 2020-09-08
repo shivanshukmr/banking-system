@@ -43,11 +43,9 @@ def usercreation():
                     print("password do not match")
                     flag = True
 
-    from db import connector
-    get_DB()
-    cursor = get_Cursor()
-    query = "insert into users(name, lastname, passwd) values(name, lname, passwd);"
-    cursor.execute(query)
+    query = "insert into users(name, lastname, passwd) values(%s,%s,%s)" % (
+        name, lname, passwd)
+    cursor.execute(query)  # cursor=get_Cursor()
     db.commit
 
 
@@ -58,10 +56,7 @@ def userauthentication():
     '''
 
     flag = False
-    from db.connector import *
-    get_DB()
-    cursor = get_Cursor()
-    cursor.execute("select * from users")
+    cursor.execute("select * from users")  # cursor = get_Cursor()
     data = cursor.fetchall()
 
     while flag:  # user authentication
@@ -77,7 +72,4 @@ def userauthentication():
                 print("account no. or the password is wrong")
                 break
 
-    return flag  # returns true or false
-
-
-userauthentication()
+    return flag  # returns true if user verified else false
