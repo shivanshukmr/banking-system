@@ -1,2 +1,3 @@
 .vscode
 src/core/db/pass.txt
+__pycache__

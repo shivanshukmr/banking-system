@@ -1,6 +1,4 @@
-# main file(will contain menu and function calls)
 from core.models.user import User
-
 
 user = None
 while True:
