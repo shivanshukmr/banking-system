@@ -2,8 +2,13 @@
 # deposit and withdraw money
 # transfer money to other users
 
+from db.connector import *
+
+
 def deposite():
     "Deposit money to current users acc."
+    get_DB()
+    cursor = get_Cursor()
     money = int(input("money to be deposited"))
 
     # in users table
