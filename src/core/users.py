@@ -4,9 +4,10 @@
 
 # to create table
 
+
 # from core.db import connector
 # get_DB()
-#cursor = get_Cursor()
+# cursor = get_Cursor()
 # query = '''create table users
 #    (name varchar(100) NOT NULL,
 #    lastname varchar(100) NOT NULL,
