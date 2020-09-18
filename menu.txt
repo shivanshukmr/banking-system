@@ -12,23 +12,23 @@ if notsignin
     
     
     >> signin
-        #-- calls userauthentication function from core/users.py
+        #-- calls userauthentication function from core/users.py        (func created)
     
     >> createuser
-        #-- calls usercreation function from core/users.py
+        #-- calls usercreation function from core/users.py              (func created)
 }    
 
 else
 {
     >> help
 
-    transfer  -  Transfer money to other users
-    deposit   -  Deposit money
-    withdraw  -  Withdraw money
-    balance   -  Show balance
-    details   -  Show all details about you(name, accno., balance)
-    transactionhistory  -  Show transactionhistory
-    getusers  -  Show other users(name, accno.)
+    transfer  -  Transfer money to other users                          ()
+    deposit   -  Deposit money                                          (func created)
+    withdraw  -  Withdraw money                                         (func created)
+    balance   -  Show balance                                           (func created)
+    details   -  Show all details about you(name, accno., balance)      (func created)
+    transactionhistory  -  Show transactionhistory                      ()
+    getusers  -  Show other users(name, accno.)                         (func created)
     signout  -  Signout
 }
 

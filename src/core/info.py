@@ -41,7 +41,7 @@ def balance():
     # acc is the account no. of the current user
     query = "select balance from users where accno=%s" % (acc,)
     cursor.execute(query)
-    for row in cursor.fetchall():
+    for row in cursor.fetchone():
         print(row)
 
 
