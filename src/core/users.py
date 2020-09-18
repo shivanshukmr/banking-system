@@ -2,22 +2,6 @@
 # user creation
 # user authentication/signin
 
-# to create table
-
-
-# from core.db import connector
-# get_DB()
-# cursor = get_Cursor()
-# query = '''create table users
-#    (name varchar(100) NOT NULL,
-#    lastname varchar(100) NOT NULL,
-#    accno int(6) PRIMARY KEY AUTO_INCREMENT, let first accno be setted by us as 123456
-#    passwd int(6) NOT NULL,
-#    date_created datetime NOt NULL,
-#    balance int);
-#    '''
-# cursor.execute(query)
-
 
 def usercreation():
     '''
@@ -28,16 +12,15 @@ def usercreation():
     lname = input("your lastname:")
 
     flag = True  # taking password twice
+
     while flag:
         for i in range(0, 2):
-            if i == 1:
-                print('confirm password')
-            passwd = int(
-                input("enter your password(only 6 integers allowed):"))
             if i == 0:
+                passwd = input("enter a password")
                 a = passwd
             if i == 1:
-                if a == passwd:
+                passwd = input("confirm password")
+                if passwd == a:
                     print("password confirmed")
                     flag = False
                 else:
@@ -62,7 +45,7 @@ def userauthentication():
 
     while flag:  # user authentication
         acc = int(input("enter your accno"))
-        passwd = int(input("enter your password"))
+        passwd = input("enter your password")
 
         for row in data:
             # checks every record from column 3(accno) with the users input
