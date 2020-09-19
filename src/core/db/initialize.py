@@ -11,33 +11,42 @@ db = mysql.connector.connect(
     user="root",
     passwd=output[0].strip("\n")
 )
-
 cursor = db.cursor()
-query = "create database if not exists bank"
+
+# Create bank database
+query = '''CREATE DATABASE IF NOT EXISTS bank'''
 cursor.execute(query)
 db.commit()
 
-query = '''create table if not exists bank.users
-    (firstname varchar(100) NOT NULL,
-    lastname varchar(100) NOT NULL,
-    accno int(6) PRIMARY KEY AUTO_INCREMENT,
-    passwd varchar(32) NOT NULL,
-    date_created datetime NOt NULL,
-    balance int)'''
 
-cursor.execute(query)
-db.commit()
-
-query = '''alter table bank.users auto_increment=100000'''
-cursor.execute(query)
-db.commit()
-
-query = '''create table if not exists bank.transactionhistory
+# Create bank.users table
+query = '''
+CREATE TABLE IF NOT EXISTS bank.users
 (
-    user1accno int(6),
-    user2accno int(6),
-    amount int not null,
-    datetime datetime not null,
+    firstname VARCHAR(100) NOT NULL,
+    lastname VARCHAR(100) NOT NULL,
+    accno INT(6) PRIMARY KEY AUTO_INCREMENT,
+    passwd VARCHAR(32) NOT NULL,
+    date_created DATETIME NOT NULL,
+    balance INT
+)
+'''
+cursor.execute(query)
+db.commit()
+
+query = '''ALTER TABLE bank.users AUTO_INCREMENT=100000'''
+cursor.execute(query)
+db.commit()
+
+
+# Create bank.transactionhistory table
+query = '''
+CREATE TABLE IF NOT EXISTS bank.transactionhistory
+(
+    user1accno INT(6),
+    user2accno INT(6),
+    amount INT NOT NULL,
+    datetime DATETIME NOT NULL,
     FOREIGN KEY (user1accno) REFERENCES bank.users(accno)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
@@ -45,7 +54,6 @@ query = '''create table if not exists bank.transactionhistory
         ON UPDATE CASCADE
         ON DELETE CASCADE
 )'''
-
 cursor.execute(query)
 db.commit()
 
