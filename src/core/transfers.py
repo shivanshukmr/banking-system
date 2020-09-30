@@ -37,6 +37,3 @@ def withdraw():
 
 def transfer():
     "Transfer money to other users"
-
-
-deposite()
