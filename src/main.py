@@ -1,5 +1,6 @@
 from core.models.user import User
-from core.models import menu_txt
+from core.models.menu_txt import *
+
 user = None
 while True:
     # menu here
