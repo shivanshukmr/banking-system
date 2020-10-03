@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS bank.users
     accno INT(6) PRIMARY KEY AUTO_INCREMENT,
     passwd VARCHAR(32) NOT NULL,
     date_created DATE NOT NULL DEFAULT NOW(),
-    balance INT
+    balance INT NOT NULL
 )
 """
 cursor.execute(query)
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS bank.transactionhistory
     user1accno INT(6),
     user2accno INT(6),
     amount INT NOT NULL,
-    datetime DATETIME NOT NULL,
+    datetime DATETIME NOT NULL DEFAULT NOW(),
     FOREIGN KEY (user1accno) REFERENCES bank.users(accno)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
