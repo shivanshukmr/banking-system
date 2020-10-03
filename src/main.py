@@ -1,7 +1,9 @@
+from core.db.connector import *
 from core.assets.assets import bankcli_asciiart, help_notsignedin, help_signedin
-from core.info import balance
+from core.info import balance, details, getusers
 from core.models.user import User
 from core.users import userauthentication
+from core.transfers import deposit, withdraw
 
 user = None
 firsttime = True
@@ -20,7 +22,16 @@ while True:
         if command == "help":
             print(help_signedin)
         elif command == "balance":
+            print("Your balance:")
             balance(user)
+        elif command == "details":
+            details(user)
+        elif command == "showusers":
+            getusers(user)
+        elif command == "deposit":
+            deposit(user)
+        elif command == "withdraw":
+            withdraw(user)
         elif command == "exit":
             break
 
@@ -29,7 +40,9 @@ while True:
         command = input(">> ")
         if command == "help":
             print(help_notsignedin)
+        elif command == "createaccount":
+            usercreation()
         elif command == "signin":
-            user = userauthentication()
+            userauthentication()
         elif command == "exit":
             break

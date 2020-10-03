@@ -4,15 +4,16 @@
 from core.db.connector import get_Cursor, get_DB
 from core.models.user import User
 
-cursor = get_Cursor()
-db = get_DB()
-
 
 def usercreation():
     """
     Gets name, password(twice), and updates db.
     user gets auto-generated accno.
     """
+
+    cursor = get_Cursor()
+    db = get_DB()
+
     name = input("your firstname:")
     lname = input("your lastname:")
 
@@ -39,9 +40,14 @@ def usercreation():
     )
     cursor.execute(query)  # cursor=get_Cursor()
     db.commit()
+    print("created new account")
 
 
 def userauthentication():
+
+    cursor = get_Cursor()
+    db = get_DB()
+
     """
     Gets account no., password and check in db
     returns user object
@@ -63,10 +69,21 @@ def userauthentication():
             else:
                 print("account no. or the password is wrong")
                 break
+    # returns true if user verified else false
+    if flag == True:
+        # get firstname, lastname, datecreated, and balance
+        cursor.execute("select name from users where accno = %s" % (acc,))
+        firstname = cursor.fetchone()
+        cursor.execute("select lastname from users where accno = %s" % (acc,))
+        lastname = cursor.fetchone()
+        cursor.execute(
+            "select datecreated from users where accno = %s" % (acc,))
+        datecreated = cursor.fetchone()
+        cursor.execute("select balance from users where accno = %s" % (acc,))
+        balance = cursor.fetchone()
+        # return User object
 
-    # get firstname, lastname, datecreated, and balance
-    # return User object
+        return User(user, acc, firstname, lastname, datecreated, balance)
 
-    return User(
-        acc,
-    )  # returns true if user verified else false
+    if flag == False:
+        return None

@@ -5,31 +5,34 @@
 # display transaction history(current user)
 from core.db.connector import get_Cursor, get_DB
 
-cursor = get_Cursor()
-db = get_DB()
 
-
-def getusers():
+def getusers(user):
     "display other users w/ bankaccout nos."
+    cursor = get_Cursor()
+    db = get_DB()
 
     # acc is the account no. of the current user
-    query = "select accno, firstname, lastname from users where accno <> %s" % (acc,)
+    acc = user.accno
+    query = "select accno, firstname, lastname from users where accno <> %s" % (
+        acc,)
     cursor.execute(query)
     for row in cursor.fetchall():
         print(row)
 
 
-def details():
-    "shows firstname, lastname accno. and balance"
+def details(user):
+    #"shows firstname, lastname accno. and balance"
 
     # acc is the account no. of the current user
-    query = (
-        "select accno, firstname, lastname, balance, date_created from users where accno = %s"
-        % (acc,)
-    )
-    cursor.execute(query)
-    for row in cursor.fetchall():
-        print(row)
+    # query = (
+    #    "select accno, firstname, lastname, balance, date_created from users where accno = %s"
+    #    % (acc,)
+    # )
+    # cursor.execute(query)
+    # for row in cursor.fetchall():
+    #    print(row)
+    print(user.accno, user.firstname, user.lastname,
+          user.balance, user.datecreated)
 
 
 def balance(user):
