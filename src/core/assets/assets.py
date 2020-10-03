@@ -1,7 +1,12 @@
-header = ""
+# this might look broken but this works
+bankcli_asciiart = """  ____                    _       ____   _       ___
+ | __ )    __ _   _ __   | | __  / ___| | |     |_ _|
+ |  _ \\   / _` | | '_ \\  | |/ / | |     | |      | |
+ | |_) | | (_| | | | | | |   <  | |___  | |___   | |
+ |____/   \\__,_| |_| |_| |_|\\_\\  \\____| |_____| |___|
+"""
 
-
-line1 = """
+help_signedin = """
 Commands:
     help                    : Show this help message and exit
     transfer                : Transfer money
@@ -12,12 +17,13 @@ Commands:
     transactionhistory      : Show transaction history
     showusers               : Show other accounts
     signout                 : Signout
+    exit                    : Exit
 """
 
-
-line2 = """
+help_notsignedin = """
 Commands:
     help                    : Show this help message and exit
     signin                  : Sign in to your bank account
     createaccount           : Create a new bank account
+    exit                    : Exit
 """
