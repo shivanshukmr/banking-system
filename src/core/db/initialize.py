@@ -7,40 +7,38 @@ with open(pass_path, "r") as f:
     output = f.readlines()
 
 db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd=output[0].strip("\n")
+    host="localhost", user="root", passwd=output[0].strip("\n")
 )
 cursor = db.cursor()
 
 # Create bank database
-query = '''CREATE DATABASE IF NOT EXISTS bank'''
+query = """CREATE DATABASE IF NOT EXISTS bank"""
 cursor.execute(query)
 db.commit()
 
 
 # Create bank.users table
-query = '''
+query = """
 CREATE TABLE IF NOT EXISTS bank.users
 (
-    firstname VARCHAR(100) NOT NULL,
-    lastname VARCHAR(100) NOT NULL,
+    firstname VARCHAR(32) NOT NULL,
+    lastname VARCHAR(32) NOT NULL,
     accno INT(6) PRIMARY KEY AUTO_INCREMENT,
     passwd VARCHAR(32) NOT NULL,
-    date_created DATETIME NOT NULL,
+    date_created DATE NOT NULL DEFAULT NOW(),
     balance INT
 )
-'''
+"""
 cursor.execute(query)
 db.commit()
 
-query = '''ALTER TABLE bank.users AUTO_INCREMENT=100000'''
+query = """ALTER TABLE bank.users AUTO_INCREMENT=100000"""
 cursor.execute(query)
 db.commit()
 
 
 # Create bank.transactionhistory table
-query = '''
+query = """
 CREATE TABLE IF NOT EXISTS bank.transactionhistory
 (
     user1accno INT(6),
@@ -53,7 +51,7 @@ CREATE TABLE IF NOT EXISTS bank.transactionhistory
     FOREIGN KEY (user2accno) REFERENCES bank.users(accno)
         ON UPDATE CASCADE
         ON DELETE CASCADE
-)'''
+)"""
 cursor.execute(query)
 db.commit()
 
