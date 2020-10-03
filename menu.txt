@@ -51,6 +51,7 @@ Commands:
     help                    : Show this help message and exit
     signin                  : Sign in to your bank account
     createaccount           : Create a new bank account
+    exit
 
 # when signed in
 
@@ -64,3 +65,4 @@ Commands:
     transactionhistory      : Show transaction history
     showusers               : Show other accounts
     signout                 : Signout
+    exit

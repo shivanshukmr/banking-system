@@ -2,7 +2,7 @@
 # deposit and withdraw money
 # transfer money to other users
 
-from db.connector import *
+from core.db.connector import *
 
 
 def deposite():
