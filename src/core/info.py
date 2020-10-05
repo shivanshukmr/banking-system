@@ -4,6 +4,7 @@
 # display balance
 # display transaction history(current user)
 from core.db.connector import get_Cursor, get_DB
+from core.models.transaction import Transaction
 
 cursor = get_Cursor()
 db = get_DB()
@@ -46,5 +47,28 @@ def balance(user):
     print(user.balance)
 
 
-def trans_history():
-    "display transaction history of current user"
+def transactionHistory(user):
+    """
+    Display transaction history of current user
+    """
+    # get all transactions involving current user (recent to oldest)
+    cursor.execute(
+        "SELECT * FROM transactionhistory WHERE user1accno = {0} OR user2accno = {0} ORDER BY time_of_transaction DESC".format(
+            user.accno,
+        )
+    )
+    transaction_hist = []
+    for transaction in cursor.fetchall():
+        transaction_hist.append(Transaction.fromTuple(transaction))
+
+    if transaction_hist == []:
+        pass
+    else:
+        # print transactions
+        print(
+            "{:<23} {:<32} {:<12}   {:<12}".format(
+                "Date", "Description", "Withdrawal", "Deposit"
+            )
+        )
+        for transaction in transaction_hist:
+            transaction.print(user)
