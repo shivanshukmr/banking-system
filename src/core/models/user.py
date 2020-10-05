@@ -1,5 +1,4 @@
 class User:
-
     def __init__(self, accno, firstname, lastname, datecreated, balance):
         self.accno = accno
         self.firstname = firstname
