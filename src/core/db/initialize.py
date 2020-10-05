@@ -21,8 +21,8 @@ db.commit()
 query = """
 CREATE TABLE IF NOT EXISTS bank.users
 (
-    firstname VARCHAR(32) NOT NULL,
-    lastname VARCHAR(32) NOT NULL,
+    firstname VARCHAR(16) NOT NULL,
+    lastname VARCHAR(16) NOT NULL,
     accno INT(6) PRIMARY KEY AUTO_INCREMENT,
     passwd VARCHAR(32) NOT NULL,
     date_created DATE NOT NULL DEFAULT NOW(),
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS bank.transactionhistory
     user1accno INT(6),
     user2accno INT(6),
     amount INT NOT NULL,
-    datetime DATETIME NOT NULL DEFAULT NOW(),
+    time_of_transaction DATETIME NOT NULL DEFAULT NOW(),
     FOREIGN KEY (user1accno) REFERENCES bank.users(accno)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
