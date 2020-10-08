@@ -9,7 +9,7 @@ def deposit(user):
     "Deposit money to current users acc."
     get_DB()
     cursor = get_Cursor()
-    money = int(input("money to be deposited"))
+    money = int(input("amount to be deposited"))
 
     # in users table
     acc = user.accno  # acc is the account no. of the current user
@@ -20,12 +20,12 @@ def deposit(user):
 
     # in transaction table
 
-    print("deposited", money, "in account-", acc)
+    print("deposited Rs.", money, "in account-", acc)
 
 
 def withdraw(user):
     "Withdraw money from current users acc."
-    money = int(input("money to be withdrawn"))
+    money = int(input("amount to be withdrawn"))
 
     # in users table
     acc = user.accno  # acc is the account no. of the current user
@@ -36,8 +36,22 @@ def withdraw(user):
 
     # in transaction table
 
-    print("withdrew", money, "from account-", acc)
+    print("withdrew Rs.", money, "from account-", acc)
 
 
-def transfer():
+def transfer(user):
     "Transfer money to other users"
+    acc2 = int(input("account number of the recipient"))
+    money = int(input("amount to be trasfered"))
+    acc = user.accno
+
+    # in users table
+    query = "update users set balance -= %s where accno=%s" % (money, acc)
+    cursor.execute(query)
+    query2 = "update users set balance += %s where accno=%s" % (money, acc2)
+    cursor.execute(query2)
+    db.commit
+
+    # in transaction  table
+
+    print("transfered Rs.", money, "to account no.-", acc2)
