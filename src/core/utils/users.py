@@ -14,7 +14,7 @@ def usercreation():
     cursor = get_Cursor()
     db = get_DB()
 
-    name = input("your firstname:")
+    fname = input("your firstname:")
     lname = input("your lastname:")
 
     flag = True  # taking password twice
@@ -33,17 +33,20 @@ def usercreation():
                     print("password do not match")
                     flag = True
 
-    query = "insert into users(name, lastname, passwd) values(%s,%s,%s)" % (
-        name,
-        lname,
-        passwd,
-    )
-    cursor.execute(query)  # cursor=get_Cursor()
+    cursor.execute(
+        "insert into users(firstname,lastname,passwd) values(%s,%s,%s)",
+        (fname, lname, passwd),
+    )  # cursor=get_Cursor()
     db.commit()
     print("created new account")
 
+    cursor.execute("select max(accno) from users;")
+    acc = cursor.fetchone()
+    print("your account number is", acc[0])
+
 
 def userauthentication():
+    import getpass
 
     cursor = get_Cursor()
     db = get_DB()
@@ -57,9 +60,9 @@ def userauthentication():
     cursor.execute("select * from users")  # cursor = get_Cursor()
     data = cursor.fetchall()
 
-    while flag:  # user authentication
+    while flag == False:  # user authentication
         acc = int(input("enter your accno"))
-        passwd = input("enter your password")
+        passwd = getpass.getpass("enter your password")
 
         for row in data:
             # checks every record from column 3(accno) with the users input
@@ -68,22 +71,22 @@ def userauthentication():
                 break
             else:
                 print("account no. or the password is wrong")
+                flag = False
                 break
     # returns true if user verified else false
     if flag == True:
         # get firstname, lastname, datecreated, and balance
-        cursor.execute("select name from users where accno = %s" % (acc,))
+        cursor.execute("select firstname from users where accno = %s", (acc,))
         firstname = cursor.fetchone()
-        cursor.execute("select lastname from users where accno = %s" % (acc,))
+        cursor.execute("select lastname from users where accno = %s", (acc,))
         lastname = cursor.fetchone()
-        cursor.execute(
-            "select datecreated from users where accno = %s" % (acc,))
+        cursor.execute("select date_created from users where accno = %s", (acc,))
         datecreated = cursor.fetchone()
-        cursor.execute("select balance from users where accno = %s" % (acc,))
+        cursor.execute("select balance from users where accno = %s", (acc,))
         balance = cursor.fetchone()
         # return User object
 
-        return User(user, acc, firstname, lastname, datecreated, balance)
+        return User(acc, firstname, lastname, datecreated, balance)
 
     if flag == False:
         return None
