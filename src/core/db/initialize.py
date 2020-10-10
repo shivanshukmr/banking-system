@@ -1,7 +1,8 @@
 import mysql.connector
 import os.path
 
-pass_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "pass.txt")
+pass_path = os.path.join(os.path.abspath(
+    os.path.dirname(__file__)), "pass.txt")
 
 with open(pass_path, "r") as f:
     output = f.readlines()
@@ -25,8 +26,8 @@ CREATE TABLE IF NOT EXISTS bank.users
     lastname VARCHAR(16) NOT NULL,
     accno INT(6) PRIMARY KEY AUTO_INCREMENT,
     passwd VARCHAR(32) NOT NULL,
-    date_created DATE NOT NULL DEFAULT NOW(),
-    balance INT NOT NULL
+    date_created DATETIME NOT NULL DEFAULT NOW(),
+    balance INT NOT NULL DEFAULT 0
 )
 """
 cursor.execute(query)
