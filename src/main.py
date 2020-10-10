@@ -1,14 +1,9 @@
 from core.assets.assets import bankcli_asciiart, help_notsignedin, help_signedin
 from core.utils.info import balance, details, getusers, transactionHistory
 from core.models.user import User
-<<<<<<< HEAD
-from core.users import userauthentication, usercreation
-from core.transfers import deposit, withdraw
-import getpass
-=======
 from core.utils.users import userauthentication, usercreation
 from core.utils.transfers import deposit, withdraw
->>>>>>> b17072f3055d066431a43a10e9a5244cd638b748
+import getpass
 
 user = None
 firsttime = True
