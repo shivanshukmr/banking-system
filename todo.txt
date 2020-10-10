@@ -34,15 +34,9 @@ features:
         (with other users as well as deposits/withdrawals)
     #-- core/info.py --#
 
-(solved)
-problems:
-    - how to store deposits and withdraws history properly
-(solved)
-
 optional:
     - initial setup to configure host, user, password, etc for mysql
     - admin user that can see all transaction histories
     - ability to change password
     - delete user
     - store salted and hashed passwords
-

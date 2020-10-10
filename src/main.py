@@ -35,6 +35,8 @@ while True:
             deposit(user)
         elif command == "withdraw":
             withdraw(user)
+        elif command == "signout":
+            user = None
         elif command == "exit":
             break
 
