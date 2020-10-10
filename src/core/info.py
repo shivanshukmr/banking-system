@@ -31,7 +31,21 @@ def details(user):
     # cursor.execute(query)
     # for row in cursor.fetchall():
     #    print(row)
-    print(user.accno, user.firstname, user.lastname, user.balance, user.datecreated)
+    print(
+        "{:<12} {:<15} {:<15} {:<12} {:<24}".format(
+            "Account no.", "Firstname", "Lastname", "Balance", "Acount created on"
+        )
+    )
+    print(
+        "{:<12} {:<15} {:<15} {:<12} {:<30}".format(
+            user.accno,
+            user.firstname[0],
+            user.lastname[0],
+            user.balance[0],
+            user.datecreated[0],
+        )
+    )
+    print(user.datecreated)
 
 
 def balance(user):
@@ -45,7 +59,7 @@ def balance(user):
     # cursor.execute(query)
     # for row in cursor.fetchone():
     #     print(row)
-    print(user.balance)
+    print(user.balance[0])
 
 
 def transactionHistory(user):

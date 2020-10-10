@@ -3,6 +3,7 @@ from core.info import balance, details, getusers, transactionHistory
 from core.models.user import User
 from core.users import userauthentication, usercreation
 from core.transfers import deposit, withdraw
+import getpass
 
 user = None
 firsttime = True
