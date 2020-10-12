@@ -33,7 +33,7 @@ def details(user):
     #    print(row)
     print(
         "{:<12} {:<15} {:<15} {:<12} {:<24}".format(
-            "Account no.", "Firstname", "Lastname", "Balance", "Acount created on"
+            "Account no.", "Firstname", "Lastname", "Balance", "Account created on"
         )
     )
     print(

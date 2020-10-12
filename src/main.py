@@ -2,7 +2,7 @@ from core.assets.assets import bankcli_asciiart, help_notsignedin, help_signedin
 from core.utils.info import balance, details, getusers, transactionHistory
 from core.models.user import User
 from core.utils.users import userauthentication, usercreation
-from core.utils.transfers import deposit, withdraw
+from core.utils.transfers import deposit, withdraw, transfer
 import getpass
 
 user = None
