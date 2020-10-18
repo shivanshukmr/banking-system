@@ -71,11 +71,10 @@ def userauthentication():
             if row[2] == acc and row[3] == passwd:
                 flag = True
                 break
-            else:
-                print("account no. or the password is wrong. Try again")
-                print("press 0 to skip signin")
-                flag = False
-                break
+        if flag == False:
+            print("account no. or the password is wrong. Try again")
+            print("press 0 to skip signin")
+
     # returns true if user verified else false
 
     if flag == True:
