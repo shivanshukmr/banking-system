@@ -16,8 +16,15 @@ def getusers(user):
     acc = user.accno
     query = "select accno, firstname, lastname from users where accno <> %s" % (acc,)
     cursor.execute(query)
+    print("{:<12} {:<15} {:<15}".format("Account no.", "Firstname", "Lastname"))
     for row in cursor.fetchall():
-        print(row)
+        print(
+            "{:<12} {:<15} {:<15}".format(
+                row[0],
+                row[1],
+                row[2],
+            )
+        )
 
 
 def details(user):
