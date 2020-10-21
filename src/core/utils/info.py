@@ -39,6 +39,7 @@ def details(user):
     # cursor.execute(query)
     # for row in cursor.fetchall():
     #    print(row)
+    date = str(user.datecreated[0])
     print(
         "{:<12} {:<15} {:<15} {:<12} {:<20}".format(
             "Account no.", "Firstname", "Lastname", "Balance", "Account created on"
@@ -50,10 +51,9 @@ def details(user):
             user.firstname[0],
             user.lastname[0],
             user.balance[0],
-            user.datecreated[0],
+            date,
         )
     )
-    print(user.datecreated)
 
 
 def balance(user):
