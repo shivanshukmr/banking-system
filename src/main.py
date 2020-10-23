@@ -38,6 +38,8 @@ while True:
             withdraw(user)
         elif command == "signout":
             user = None
+        elif command == "transfer":
+            transfer(user)
         elif command == "exit":
             break
 

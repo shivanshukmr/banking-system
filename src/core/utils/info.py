@@ -16,8 +16,16 @@ def getusers(user):
     acc = user.accno
     query = "select accno, firstname, lastname from users where accno <> %s" % (acc,)
     cursor.execute(query)
+    # users table
+    print("{:<12} {:<15} {:<15}".format("Account no.", "Firstname", "Lastname"))
     for row in cursor.fetchall():
-        print(row)
+        print(
+            "{:<12} {:<15} {:<15}".format(
+                row[0],
+                row[1],
+                row[2],
+            )
+        )
 
 
 def details(user):
@@ -31,21 +39,21 @@ def details(user):
     # cursor.execute(query)
     # for row in cursor.fetchall():
     #    print(row)
+    date = str(user.datecreated[0])
     print(
-        "{:<12} {:<15} {:<15} {:<12} {:<24}".format(
+        "{:<12} {:<15} {:<15} {:<12} {:<20}".format(
             "Account no.", "Firstname", "Lastname", "Balance", "Account created on"
         )
     )
     print(
-        "{:<12} {:<15} {:<15} {:<12} {:<30}".format(
+        "{:<12} {:<15} {:<15} {:<12} {:<20}".format(
             user.accno,
             user.firstname[0],
             user.lastname[0],
             user.balance[0],
-            user.datecreated[0],
+            date,
         )
     )
-    print(user.datecreated)
 
 
 def balance(user):

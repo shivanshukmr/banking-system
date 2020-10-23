@@ -10,6 +10,7 @@ def usercreation():
     Gets name, password(twice), and updates db.
     user gets auto-generated accno.
     """
+    import getpass
 
     cursor = get_Cursor()
     db = get_DB()
@@ -17,15 +18,14 @@ def usercreation():
     fname = input("your firstname:")
     lname = input("your lastname:")
 
-    flag = True  # taking password twice
-
-    while flag:
+    flag = True
+    while flag:  # taking password twice and cnfirming password
         for i in range(0, 2):
             if i == 0:
-                passwd = input("enter a password")
+                passwd = getpass.getpass("enter a password")
                 a = passwd
             if i == 1:
-                passwd = input("confirm password")
+                passwd = getpass.getpass("confirm password")
                 if passwd == a:
                     print("password confirmed")
                     flag = False
@@ -62,6 +62,8 @@ def userauthentication():
 
     while flag == False:  # user authentication
         acc = int(input("enter your accno"))
+        if acc == 0:
+            break
         passwd = getpass.getpass("enter your password")
 
         for row in data:
@@ -69,11 +71,12 @@ def userauthentication():
             if row[2] == acc and row[3] == passwd:
                 flag = True
                 break
-            else:
-                print("account no. or the password is wrong")
-                flag = False
-                break
+        if flag == False:
+            print("account no. or the password is wrong. Try again")
+            print("press 0 to skip signin")
+
     # returns true if user verified else false
+
     if flag == True:
         # get firstname, lastname, datecreated, and balance
         cursor.execute("select firstname from users where accno = %s", (acc,))
