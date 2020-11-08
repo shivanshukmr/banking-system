@@ -26,7 +26,6 @@ while True:
         elif command == "transactionhistory":
             transactionHistory(user)
         elif command == "balance":
-            print("Your balance:")
             balance(user)
         elif command == "details":
             details(user)
@@ -38,6 +37,7 @@ while True:
             withdraw(user)
         elif command == "signout":
             user = None
+            print("You have signed out.")
         elif command == "transfer":
             transfer(user)
         elif command == "exit":

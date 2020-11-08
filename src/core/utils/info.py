@@ -67,7 +67,7 @@ def balance(user):
     # cursor.execute(query)
     # for row in cursor.fetchone():
     #     print(row)
-    print(user.balance[0])
+    print("Your balance:", user.balance[0])
 
 
 def transactionHistory(user):
