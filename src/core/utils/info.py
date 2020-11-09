@@ -86,7 +86,7 @@ def transactionHistory(user):
         transaction_hist.append(Transaction.fromTuple(transaction))
 
     if transaction_hist == []:
-        pass
+        print("No Transactions")
     else:
         # print transactions
         print(
