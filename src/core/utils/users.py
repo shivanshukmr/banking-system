@@ -1,7 +1,7 @@
 # get connection object and cursor object from dbconnector.connector
 # user creation
 # user authentication/signin
-from core.db.connector import get_Cursor, get_DB
+from core.db.connector import get_DB
 from core.models.user import User
 
 
@@ -12,8 +12,8 @@ def usercreation():
     """
     import getpass
 
-    cursor = get_Cursor()
     db = get_DB()
+    cursor = db.cursor()
 
     fname = input("Your firstname:")
     lname = input("Your lastname:")
@@ -37,7 +37,7 @@ def usercreation():
     cursor.execute(
         "insert into users(firstname,lastname,passwd) values(%s,%s,%s)",
         (fname, lname, passwd),
-    )  # cursor=get_Cursor()
+    )
     db.commit()
     print("Created new account.")
 
@@ -50,8 +50,8 @@ def usercreation():
 def userauthentication():
     import getpass
 
-    cursor = get_Cursor()
     db = get_DB()
+    cursor = db.cursor()
 
     """
     Gets account no., password and check in db
@@ -59,7 +59,7 @@ def userauthentication():
     """
 
     flag = False
-    cursor.execute("select * from users")  # cursor = get_Cursor()
+    cursor.execute("select * from users")
     data = cursor.fetchall()
 
     while flag == False:  # user authentication
