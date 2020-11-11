@@ -1,9 +1,12 @@
 from core.assets.assets import bankcli_asciiart, help_notsignedin, help_signedin
+from core.db.initialize import initialize_db
 from core.utils.info import balance, details, getusers, transactionHistory
 from core.models.user import User
 from core.utils.users import userauthentication, usercreation
 from core.utils.transfers import deposit, withdraw, transfer
 
+
+initialize_db()
 user = None
 
 print(bankcli_asciiart)
