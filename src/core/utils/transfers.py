@@ -10,7 +10,7 @@ def deposit(user):
 
     db = get_DB()
     cursor = get_Cursor()
-    money = int(input("amount to be deposited"))
+    money = int(input("Amount to be deposited:"))
     acc = user.accno  # acc is the account no. of the current user
     balance = int(user.balance[0])
     balance += money
@@ -30,7 +30,7 @@ def deposit(user):
     balance = cursor.fetchone()
     user.balance = balance
 
-    print("deposited Rs.", money, "in account-", acc)
+    print("Deposited Rs.", money, "in account-", acc)
 
 
 def withdraw(user):
@@ -38,13 +38,13 @@ def withdraw(user):
 
     balance = user.balance[0]
     if balance == 0:  # check for balance
-        print("You can't withdraw money")
+        print("You can't withdraw money.")
         print("Balance: 0")
     else:
-        money = int(input("amount to be withdrawn"))
+        money = int(input("Amount to be withdrawn:"))
         if money > balance:
-            print("Amount exceeds current balance")
-            print("Can't withdraw")
+            print("Amount exceeds current balance.")
+            print("Can't withdraw.")
         else:
             balance -= money
             db = get_DB()
@@ -67,7 +67,7 @@ def withdraw(user):
             balance = cursor.fetchone()
             user.balance = balance
 
-            print("withdrew Rs.", money, "from account-", acc)
+            print("Withdrew Rs.", money, "from account-", acc)
 
 
 def transfer(user):
@@ -75,23 +75,23 @@ def transfer(user):
 
     balance = user.balance[0]
     if balance == 0:  # check for balance
-        print("You can't transfer money")
+        print("You can't transfer money.")
         print("Balance: 0")
     else:
         db = get_DB()
         cursor = get_Cursor()
         acc = user.accno
-        acc2 = int(input("account number of the recipient"))
+        acc2 = int(input("Account number of the recipient:"))
         cursor.execute("select * from users")  # cursor = get_Cursor()
         data = cursor.fetchall()
         a = False
         for row in data:
             if row[2] == acc2 and acc2 != acc:
                 a = True
-                money = int(input("amount to be trasfered"))
+                money = int(input("Amount to be trasfered:"))
                 if money > balance:
-                    print("Amount exceeds current balance")
-                    print("Can't transfer")
+                    print("Amount exceeds current balance.")
+                    print("Can't transfer.")
                 else:
                     # in users table
                     query = "update users set balance = balance - %s where accno=%s" % (
@@ -121,6 +121,6 @@ def transfer(user):
                     balance = cursor.fetchone()
                     user.balance = balance
 
-                    print("transfered Rs.", money, "to account no.-", acc2)
+                    print("Transfered Rs.", money, "to account no.-", acc2)
         if a == False:
-            print("account no.", acc2, "doesn't exist")
+            print("Account no.", acc2, "doesn't exist.")

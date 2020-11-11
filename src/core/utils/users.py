@@ -15,22 +15,23 @@ def usercreation():
     cursor = get_Cursor()
     db = get_DB()
 
-    fname = input("your firstname:")
-    lname = input("your lastname:")
+    fname = input("Your firstname:")
+    lname = input("Your lastname:")
 
     flag = True
     while flag:  # taking password twice and cnfirming password
         for i in range(0, 2):
             if i == 0:
-                passwd = getpass.getpass("enter a password")
+                passwd = getpass.getpass("Enter a password:")
                 a = passwd
             if i == 1:
-                passwd = getpass.getpass("confirm password")
+                passwd = getpass.getpass("Confirm password:")
                 if passwd == a:
-                    print("password confirmed")
+                    print("Password confirmed.")
                     flag = False
                 else:
-                    print("password do not match")
+                    print("Passwords do not match.")
+                    print("Try again.")
                     flag = True
 
     cursor.execute(
@@ -38,11 +39,12 @@ def usercreation():
         (fname, lname, passwd),
     )  # cursor=get_Cursor()
     db.commit()
-    print("created new account")
+    print("Created new account.")
 
     cursor.execute("select max(accno) from users;")
     acc = cursor.fetchone()
-    print("your account number is", acc[0])
+    print("Your account number is-", acc[0])
+    print("Type 'details' to check your account details.")
 
 
 def userauthentication():
@@ -61,10 +63,10 @@ def userauthentication():
     data = cursor.fetchall()
 
     while flag == False:  # user authentication
-        acc = int(input("enter your accno"))
+        acc = int(input("Enter your account no.:"))
         if acc == 0:
             break
-        passwd = getpass.getpass("enter your password")
+        passwd = getpass.getpass("Enter your password:")
 
         for row in data:
             # checks every record from column 3(accno) with the users input
@@ -72,8 +74,8 @@ def userauthentication():
                 flag = True
                 break
         if flag == False:
-            print("account no. or the password is wrong. Try again")
-            print("press 0 to skip signin")
+            print("Account no. or the password is wrong. Try again.")
+            print("Press 0 to skip signin")
 
     # returns true if user verified else false
 
@@ -88,7 +90,7 @@ def userauthentication():
         cursor.execute("select balance from users where accno = %s", (acc,))
         balance = cursor.fetchone()
         # return User object
-
+        print("You are signed in.")
         return User(acc, firstname, lastname, datecreated, balance)
 
     if flag == False:
