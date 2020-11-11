@@ -3,21 +3,16 @@ from core.utils.info import balance, details, getusers, transactionHistory
 from core.models.user import User
 from core.utils.users import userauthentication, usercreation
 from core.utils.transfers import deposit, withdraw, transfer
-import getpass
 
 user = None
-firsttime = True
+
+print(bankcli_asciiart)
+print("BankCLI v1.0")
+print("Type 'help' to see the list of commands.\n")
 
 while True:
-    if firsttime:
-        # only print when its the first time
-        print(bankcli_asciiart)
-        print("BankCLI v1.0")
-        print("Type 'help' to see the list of commands.\n")
-        firsttime = False
-
     command = input(">> ")
-    command = command.strip()
+    command = command.strip().lower()
 
     if isinstance(user, User):
         # signed in
