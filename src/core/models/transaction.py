@@ -1,4 +1,4 @@
-from core.db.connector import get_DB
+from core.db.connector import get_Cursor
 
 
 class Transaction:
@@ -31,8 +31,7 @@ class Transaction:
 
         else:
             # transfer to user2accno / from user1accno
-            db = get_DB()
-            cursor = db.cursor()
+            cursor = get_Cursor()
             if self.user1accno == currentuser.accno:
                 # balance decreased
                 cursor.execute(
