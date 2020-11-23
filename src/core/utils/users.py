@@ -40,11 +40,9 @@ def usercreation():
     )  # cursor=get_Cursor()
     db.commit()
     print("Created new account.")
-
     cursor.execute("select max(accno) from users;")
     acc = cursor.fetchone()
     print("Your account number is-", acc[0])
-    print("Type 'details' to check your account details.")
 
 
 def userauthentication():
