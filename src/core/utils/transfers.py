@@ -2,7 +2,6 @@
 # deposit and withdraw money
 # transfer money to other users
 from core.db.connector import get_Cursor, get_DB
-from core.models.user import User
 
 
 def deposit(user):

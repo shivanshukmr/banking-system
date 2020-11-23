@@ -1,23 +1,39 @@
+import os.path
+from core.utils.mysqllogin import check_connection, get_mysql_credentials
+
+credentials_path = os.path.join(
+    os.path.abspath(os.path.dirname(__file__)), "core/db/mysqlcredentials.txt"
+)
+# if file doesn't exist
+if not os.path.exists(credentials_path):
+    get_mysql_credentials()
+else:
+    with open(credentials_path, "r") as f:
+        output = [word.strip("\n") for word in f.readlines()]
+
+    # if connection is unsuccessful
+    if not check_connection(output[0], output[1], output[2], output[3]):
+        get_mysql_credentials()
+
 from core.assets.assets import bankcli_asciiart, help_notsignedin, help_signedin
+from core.db.initialize import initialize_db
+
+initialize_db()
+
 from core.utils.info import balance, details, getusers, transactionHistory
 from core.models.user import User
 from core.utils.users import userauthentication, usercreation
 from core.utils.transfers import deposit, withdraw, transfer
-import getpass
 
 user = None
-firsttime = True
+
+print(bankcli_asciiart)
+print("BankCLI v1.0")
+print("Type 'help' to see the list of commands.\n")
 
 while True:
-    if firsttime:
-        # only print when its the first time
-        print(bankcli_asciiart)
-        print("BankCLI v1.0")
-        print("Type 'help' to see the list of commands.\n")
-        firsttime = False
-
     command = input(">> ")
-    command = command.strip()
+    command = command.strip().lower()
 
     if isinstance(user, User):
         # signed in
@@ -51,5 +67,7 @@ while True:
             usercreation()
         elif command == "signin":
             user = userauthentication()
+        elif command == "reconfigure":
+            get_mysql_credentials()
         elif command == "exit":
             break

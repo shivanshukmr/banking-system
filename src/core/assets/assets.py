@@ -25,5 +25,6 @@ Commands:
     help                    : Show this help message and exit
     signin                  : Sign in to your bank account
     createaccount           : Create a new bank account
+    reconfigure             : Reconfigure MySQL login credentials
     exit                    : Exit
 """

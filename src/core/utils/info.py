@@ -3,14 +3,13 @@
 # display your account info
 # display balance
 # display transaction history(current user)
-from core.db.connector import get_Cursor, get_DB
+from core.db.connector import get_Cursor
 from core.models.transaction import Transaction
 
 
 def getusers(user):
     "display other users w/ bankaccout nos."
     cursor = get_Cursor()
-    db = get_DB()
 
     # acc is the account no. of the current user
     acc = user.accno

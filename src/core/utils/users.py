@@ -49,7 +49,6 @@ def userauthentication():
     import getpass
 
     cursor = get_Cursor()
-    db = get_DB()
 
     """
     Gets account no., password and check in db
