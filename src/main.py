@@ -1,3 +1,20 @@
+import os.path
+from core.utils.mysqllogin import check_connection, get_mysql_credentials
+
+credentials_path = os.path.join(
+    os.path.abspath(os.path.dirname(__file__)), "core/db/mysqlcredentials.txt"
+)
+# if file doesn't exist
+if not os.path.exists(credentials_path):
+    get_mysql_credentials()
+else:
+    with open(credentials_path, "r") as f:
+        output = [word.strip("\n") for word in f.readlines()]
+
+    # if connection is unsuccessful
+    if not check_connection(output[0], output[1], output[2], output[3]):
+        get_mysql_credentials()
+
 from core.assets.assets import bankcli_asciiart, help_notsignedin, help_signedin
 from core.db.initialize import initialize_db
 
@@ -50,5 +67,7 @@ while True:
             usercreation()
         elif command == "signin":
             user = userauthentication()
+        elif command == "reconfigure":
+            get_mysql_credentials()
         elif command == "exit":
             break

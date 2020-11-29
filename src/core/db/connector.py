@@ -1,17 +1,19 @@
 import os.path
 import mysql.connector
 
-pass_path = os.path.join(os.path.abspath(
-    os.path.dirname(__file__)), "pass.txt")
+credentials_path = os.path.join(
+    os.path.abspath(os.path.dirname(__file__)), "mysqlcredentials.txt"
+)
 
-with open(pass_path, "r") as f:
-    output = f.readlines()
+with open(credentials_path, "r") as f:
+    output = [word.strip("\n") for word in f.readlines()]
 
 db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd=output[0].strip("\n"),
-    database="bank"
+    host=output[0],
+    port=output[1],
+    user=output[2],
+    passwd=output[3],
+    database="bank",
 )
 
 

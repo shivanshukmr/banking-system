@@ -1,3 +1,4 @@
 .vscode
-src/core/db/pass.txt
+tags
+src/core/db/mysqlcredentials.txt
 __pycache__
