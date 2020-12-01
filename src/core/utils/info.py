@@ -71,9 +71,8 @@ def balance(user):
 
 def transactionHistory(user):
     """
-    Display transaction history of current user
+    Return transaction history of current user
     """
-    # get all transactions involving current user (recent to oldest)
     cursor = get_Cursor()
     cursor.execute(
         "SELECT * FROM transactionhistory WHERE user1accno = {0} OR user2accno = {0} ORDER BY time_of_transaction DESC".format(
@@ -84,14 +83,4 @@ def transactionHistory(user):
     for transaction in cursor.fetchall():
         transaction_hist.append(Transaction.fromTuple(transaction))
 
-    if transaction_hist == []:
-        print("No Transactions")
-    else:
-        # print transactions
-        print(
-            "{:<23} {:<32} {:<12}   {:<12}".format(
-                "Date", "Description", "Withdrawal", "Deposit"
-            )
-        )
-        for transaction in transaction_hist:
-            transaction.print(user)
+    return transaction_hist
