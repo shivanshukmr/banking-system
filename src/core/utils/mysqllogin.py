@@ -1,3 +1,4 @@
+from core.assets.assets import colour, box
 from getpass import getpass
 import mysql.connector
 import os.path
@@ -30,23 +31,23 @@ def get_mysql_credentials():
 
         # print("Unable to connect to MySQL server.\n")
         # print("Enter 0 to exit.\n")
-        host_l = Label(self, text="Enter hostname", bg="#0859c6", fg="White")
-        port_l = Label(self, text="Enter port number", bg="#0859c6", fg="White")
-        user_l = Label(self, text="Enter username", bg="#0859c6", fg="White")
-        pass_l = Label(self, text="Enter password ", bg="#0859c6", fg="White")
+        host_l = Label(self, text="Enter hostname", bg=colour, fg="White")
+        port_l = Label(self, text="Enter port number", bg=colour, fg="White")
+        user_l = Label(self, text="Enter username", bg=colour, fg="White")
+        pass_l = Label(self, text="Enter password ", bg=colour, fg="White")
 
         host_l.grid(row=5, column=1)
         port_l.grid(row=6, column=1)
         user_l.grid(row=7, column=1)
         pass_l.grid(row=8, column=1)
 
-        host_e = Entry(self, width=50, bg="#badbff")
+        host_e = Entry(self, width=50, bg=box)
         host_e.insert(0, "locahost")
-        port_e = Entry(self, width=50, bg="#badbff")
+        port_e = Entry(self, width=50, bg=box)
         port_e.insert(0, "3306")
-        user_e = Entry(self, width=50, bg="#badbff")
+        user_e = Entry(self, width=50, bg=box)
         user_e.insert(0, "root")
-        pass_e = Entry(self, width=50, bg="#badbff", elide=True)
+        pass_e = Entry(self, width=50, bg=box, elide=True)
 
         host_e.grid(row=5, column=2)
         port_e.grid(row=6, column=2)

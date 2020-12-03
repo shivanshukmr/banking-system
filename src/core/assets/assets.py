@@ -1,30 +1,7 @@
-# this might look broken but this works
-bankcli_asciiart = """  ____                    _       ____   _       ___
- | __ )    __ _   _ __   | | __  / ___| | |     |_ _|
- |  _ \\   / _` | | '_ \\  | |/ / | |     | |      | |
- | |_) | | (_| | | | | | |   <  | |___  | |___   | |
- |____/   \\__,_| |_| |_| |_|\\_\\  \\____| |_____| |___|
-"""
+#colour, fonts and images to be used
 
-help_signedin = """
-Commands:
-    help                    : Show this help message and exit
-    transfer                : Transfer money
-    deposit                 : Deposit money
-    withdraw                : Withdraw money
-    details                 : Show all bank details
-    balance                 : Show current balance
-    transactionhistory      : Show transaction history
-    showusers               : Show other accounts
-    signout                 : Signout
-    exit                    : Exit
-"""
-
-help_notsignedin = """
-Commands:
-    help                    : Show this help message and exit
-    signin                  : Sign in to your bank account
-    createaccount           : Create a new bank account
-    reconfigure             : Reconfigure MySQL login credentials
-    exit                    : Exit
-"""
+colour = "#0859c6"  #colour to be used for the background
+font_c = "White"  #default font colour that would be used in the window
+box = "#badbff"  #default textbox coour that would be used in the window
+icon =  #icon of the window (15x15, 32x32 or 64x64)
+bankcli_asciiart=                #bank image
