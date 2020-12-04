@@ -22,7 +22,7 @@ from core.db.initialize import initialize_db
 
 initialize_db()
 
-from core.models.user import User
+from core.tables.user import User
 from core.utils.info import balance, details, getusers, transactionHistory
 from core.utils.transfers import deposit, transfer, withdraw
 from core.utils.users import userauthentication, usercreation

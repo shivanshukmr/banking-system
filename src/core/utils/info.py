@@ -4,7 +4,7 @@
 # display balance
 # display transaction history(current user)
 from core.db.connector import get_Cursor
-from core.models.transaction import Transaction
+from core.tables.transaction import Transaction
 
 
 def getusers(user):
