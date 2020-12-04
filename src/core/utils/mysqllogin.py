@@ -42,14 +42,18 @@ def get_mysql_credentials(self):
         port_e.grid(row=6, column=2)
         user_e.grid(row=7, column=2)
         pass_e.grid(row=8, column=2)
-        check_button=Button(sef, text="Done", command=lambda: check_connection(host_e.get(), port_e.get(), user_e.get(), pass_e.get()))
-        if check_button==True:
-            check = Label(self, text="Successfully connected to MySQL server.")
-            check.pack()
+        check_button=Button(sef, text="Check", command=lambda: check_connection(host_e.get(), port_e.get(), user_e.get(), pass_e.get()))
+        if check_button == True:
+            check2.grid_forget()
+            check1 = Label(self, text="Successfully connected to MySQL server.")
+            check1.grid(row=9, column=1, columnspan=2)
+            exit_button = Button(self, text="Done", command=)
             break
         else:
-            check = Label(self, text="Could not connect to MySQL server. Please try again.")
-            check.pack()
+            check2.grid_forget()
+            check2 = Label(self, text="Could not connect to MySQL server. Please try again.")
+            check2.grid(row=9, column=1, columnspan=2)
+            global check2
 
     # write file
     credentials_path = os.path.join(
