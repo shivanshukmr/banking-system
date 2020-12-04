@@ -14,28 +14,17 @@ def check_connection(host_, port_, user_, passwd_):
     except Exception:
         return False
 
-
-def get_mysql_credentials():
-    print("\nMySQL login credentials.\n")
+def check():
+    
+def get_mysql_credentials(self):
     while True:
-        # host_ = input("Enter hostname (default localhost):") or "localhost"
-        # if host_ == "0":
-        #     sys.exit(0)
-        # port_ = input("Enter port number (default 3306):") or "3306"
-        # user_ = input("Enter username (default root):") or "root"
-        # passwd_ = getpass("Enter password:")
-
-        # if check_connection(host_, port_, user_, passwd_):
-        #     print("Successfully connected to MySQL server.")
-        #     break
-
-        # print("Unable to connect to MySQL server.\n")
-        # print("Enter 0 to exit.\n")
+        credential_title = Label(self, text="MySQL Login Credentials", bg=colour, fg="White")
         host_l = Label(self, text="Enter hostname", bg=colour, fg="White")
         port_l = Label(self, text="Enter port number", bg=colour, fg="White")
         user_l = Label(self, text="Enter username", bg=colour, fg="White")
         pass_l = Label(self, text="Enter password ", bg=colour, fg="White")
 
+        credential_title.grid(row=4, column=1, columnspan=2)
         host_l.grid(row=5, column=1)
         port_l.grid(row=6, column=1)
         user_l.grid(row=7, column=1)
@@ -53,11 +42,14 @@ def get_mysql_credentials():
         port_e.grid(row=6, column=2)
         user_e.grid(row=7, column=2)
         pass_e.grid(row=8, column=2)
-
-        if check_connection(host_e.get(), port_e.get(), user_e.get(), pass_e.get()):
+        check_button=Button(sef, text="Done", command=lambda: check_connection(host_e.get(), port_e.get(), user_e.get(), pass_e.get()))
+        if check_button==True:
             check = Label(self, text="Successfully connected to MySQL server.")
             check.pack()
             break
+        else:
+            check = Label(self, text="Could not connect to MySQL server. Please try again.")
+            check.pack()
 
     # write file
     credentials_path = os.path.join(
@@ -65,4 +57,4 @@ def get_mysql_credentials():
         "db/mysqlcredentials.txt",
     )
     with open(credentials_path, "w") as f:
-        f.write(host_ + "\n" + port_ + "\n" + user_ + "\n" + passwd_ + "\n")
+        f.write(host_e.get() + "\n" + port_ + "\n" + user_ + "\n" + passwd_ + "\n")
