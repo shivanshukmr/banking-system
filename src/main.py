@@ -1,4 +1,5 @@
 import os.path
+
 from core.utils.mysqllogin import check_connection, get_mysql_credentials
 
 credentials_path = os.path.join(
@@ -15,15 +16,16 @@ else:
     if not check_connection(output[0], output[1], output[2], output[3]):
         get_mysql_credentials()
 
-from core.assets.assets import bankcli_asciiart, help_notsignedin, help_signedin
+from core.assets.assets import (bankcli_asciiart, help_notsignedin,
+                                help_signedin)
 from core.db.initialize import initialize_db
 
 initialize_db()
 
-from core.utils.info import balance, details, getusers, transactionHistory
 from core.models.user import User
+from core.utils.info import balance, details, getusers, transactionHistory
+from core.utils.transfers import deposit, transfer, withdraw
 from core.utils.users import userauthentication, usercreation
-from core.utils.transfers import deposit, withdraw, transfer
 
 user = None
 
@@ -58,7 +60,6 @@ while True:
             transfer(user)
         elif command == "exit":
             break
-
     else:
         # not signed in
         if command == "help":
