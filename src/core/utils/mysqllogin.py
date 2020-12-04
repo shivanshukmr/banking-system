@@ -1,4 +1,4 @@
-from core.assets.assets import colour, box
+from core.assets.assets import colour, box, font_c
 from getpass import getpass
 import mysql.connector
 import os.path
@@ -13,16 +13,14 @@ def check_connection(host_, port_, user_, passwd_):
         return True
     except Exception:
         return False
-
-def check():
     
 def get_mysql_credentials(self):
     while True:
-        credential_title = Label(self, text="MySQL Login Credentials", bg=colour, fg="White")
-        host_l = Label(self, text="Enter hostname", bg=colour, fg="White")
-        port_l = Label(self, text="Enter port number", bg=colour, fg="White")
-        user_l = Label(self, text="Enter username", bg=colour, fg="White")
-        pass_l = Label(self, text="Enter password ", bg=colour, fg="White")
+        credential_title = Label(self, text="MySQL Login Credentials", bg=colour, fg=font_c)
+        host_l = Label(self, text="Enter hostname", bg=colour, fg=font_c)
+        port_l = Label(self, text="Enter port number", bg=colour, fg=font_c)
+        user_l = Label(self, text="Enter username", bg=colour, fg=font_c)
+        pass_l = Label(self, text="Enter password ", bg=colour, fg=font_c)
 
         credential_title.grid(row=4, column=1, columnspan=2)
         host_l.grid(row=5, column=1)
