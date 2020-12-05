@@ -1,6 +1,6 @@
 from core.utils.mysqllogin import check_connection, get_mysql_credentials
 from core.utils.info import balance, details, getusers, transactionHistory
-from core.models.user import User
+from core.tables.user import User
 from core.utils.users import userauthentication, usercreation
 from core.utils.transfers import deposit, withdraw, transfer
 from core.assets.assets import colour, font_c, icon, bankcli_asciiart

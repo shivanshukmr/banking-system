@@ -1,5 +1,4 @@
-from core.assets.assets import colour, box, font_c
-from getpass import getpass
+from gui.assets.assets import colour, box, font_c
 import mysql.connector
 import os.path
 import sys
