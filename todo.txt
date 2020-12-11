@@ -1,5 +1,14 @@
+gui:
+    - cleanup core:
+        - remove unnecessary fns
+    - create custom widget classes inheriting from tk widgets
+    - windows:
+        - mysql login window(small size / popup like)
+        - signup/signin window
+        - main window(where user does stuff)
+            - may contain subwindows
+    - come up with implementation for maintaining windows(3 or more) and widgets
 optional:
-    - initial setup to configure host, user, password, etc for mysql
     - admin user that can see all transaction histories
     - ability to change password
     - delete user
