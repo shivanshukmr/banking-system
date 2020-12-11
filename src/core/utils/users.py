@@ -1,6 +1,3 @@
-# get connection object and cursor object from dbconnector.connector
-# user creation
-# user authentication/signin
 from core.db.connector import get_Cursor, get_DB
 from core.tables.user import User
 
@@ -61,7 +58,7 @@ def userauthentication():
     cursor.execute("select * from users")  # cursor = get_Cursor()
     data = cursor.fetchall()
 
-    while flag == False:  # user authentication
+    while flag is False:  # user authentication
         acc = int(input("Enter your account no.:"))
         if acc == 0:
             break
@@ -72,25 +69,25 @@ def userauthentication():
             if row[2] == acc and row[3] == passwd:
                 flag = True
                 break
-        if flag == False:
+        if flag is False:
             print("Account no. or the password is wrong. Try again.")
             print("Press 0 to skip signin")
 
     # returns true if user verified else false
 
-    if flag == True:
+    if flag is True:
         # get firstname, lastname, datecreated, and balance
         cursor.execute("select firstname from users where accno = %s", (acc,))
-        firstname = cursor.fetchone()
+        firstname = cursor.fetchone()[0]
         cursor.execute("select lastname from users where accno = %s", (acc,))
-        lastname = cursor.fetchone()
+        lastname = cursor.fetchone()[0]
         cursor.execute("select date_created from users where accno = %s", (acc,))
-        datecreated = cursor.fetchone()
+        datecreated = cursor.fetchone()[0]
         cursor.execute("select balance from users where accno = %s", (acc,))
-        balance = cursor.fetchone()
+        balance = cursor.fetchone()[0]
         # return User object
         print("You are signed in.")
         return User(acc, firstname, lastname, datecreated, balance)
 
-    if flag == False:
+    if flag is False:
         return None

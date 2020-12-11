@@ -1,8 +1,8 @@
-from gui.Assets.assets import colour, box, font_c
-import mysql.connector
 import os.path
-import sys
-from tkinter import Label, Button, Toplevel
+from tkinter import *
+
+import mysql.connector
+from gui.Assets.assets import box, colour, font_c
 
 
 def check_connection(host_, port_, user_, passwd_):
@@ -18,7 +18,7 @@ def check_connection(host_, port_, user_, passwd_):
 def get_mysql_credentials(self):
     newwindow = Toplevel(self)
     newwindow.title("MySQL Credentials")
-    newWindow.geometry("500x500")
+    newwindow.geometry("500x500")
     while True:
         credential_title = Label(
             self, text="MySQL Login Credentials", bg=colour, fg=font_c
@@ -47,7 +47,7 @@ def get_mysql_credentials(self):
         user_e.grid(row=7, column=2)
         pass_e.grid(row=8, column=2)
         check_button = Button(
-            sef,
+            self,
             text="Check",
             command=lambda: check_connection(
                 host_e.get(), port_e.get(), user_e.get(), pass_e.get()
@@ -57,7 +57,7 @@ def get_mysql_credentials(self):
             "Could not connect to MySQL server. Please try again.",
             "Successfully connected to MySQL server.",
         ]
-        if check_button == False:
+        if check_button is False:
             check = Label(self, text=a[0])
             check.grid(row=9, column=1, columnspan=2)
 
