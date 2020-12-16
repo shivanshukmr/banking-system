@@ -5,7 +5,7 @@
 # display transaction history(current user)
 from core.db.connector import get_Cursor
 from core.tables.transaction import Transaction
-from gui.Assets.assets import colour
+from gui.Assets.assets import colour, font_c
 from tkinter import Label, Button
 
 
@@ -45,8 +45,9 @@ def details(self, user):
     date_l.pack()
 
 
-def details_button(self, user):
+def details_button(self, user, row, col):
     detail_b = Button(self, text="Account Details", command=lambda: details(self, user))
+    detail_b.grid(row=row, column=col)
 
 
 def balance(self, user):
@@ -54,8 +55,9 @@ def balance(self, user):
     bal_l.pack()
 
 
-def balance_button(self, user):
+def balance_button(self, user, row, col):
     bal_b = Button(self, text="Balance", command=lambda: balance(self, user))
+    bal_b.grid(row=row, column=col)
 
 
 def transactionHistory(user):
