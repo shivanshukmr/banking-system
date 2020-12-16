@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 from gui.Assets.assets import colour, box, font_c, icon
 import mysql.connector
+=======
+>>>>>>> 176a6ada3c7f730c7d5bced5c3e25246a21e1ade
 import os.path
-import sys
-from tkinter import Label, Button, Toplevel
+from tkinter import *
+
+import mysql.connector
+from gui.Assets.assets import box, colour, font_c
 
 
 def check_connection(host_, port_, user_, passwd_):
@@ -42,22 +47,24 @@ def get_mysql_credentials(self):
     user_e.insert(0, "root")
     pass_e = Entry(self, width=50, bg=box, elide=True)
 
-    host_e.grid(row=5, column=2)
-    port_e.grid(row=6, column=2)
-    user_e.grid(row=7, column=2)
-    pass_e.grid(row=8, column=2)
-    check_button = Button(
-        self,
-        text="Check",
-        command=lambda: check_connection(host_e.get(), port_e.get(), user_e.get(), pass_e.get()))
-    a = [
-        "Could not connect to MySQL server. Please try again.",
-        "Successfully connected to MySQL server.",
-    ]
-    if check_button == False:
-        global check
-        check = Label(self, text=a[0])
-        check.grid(row=9, column=1, columnspan=2)
+        host_e.grid(row=5, column=2)
+        port_e.grid(row=6, column=2)
+        user_e.grid(row=7, column=2)
+        pass_e.grid(row=8, column=2)
+        check_button = Button(
+            self,
+            text="Check",
+            command=lambda: check_connection(
+                host_e.get(), port_e.get(), user_e.get(), pass_e.get()
+            ),
+        )
+        a = [
+            "Could not connect to MySQL server. Please try again.",
+            "Successfully connected to MySQL server.",
+        ]
+        if check_button is False:
+            check = Label(self, text=a[0])
+            check.grid(row=9, column=1, columnspan=2)
 
     else:
         gobal check

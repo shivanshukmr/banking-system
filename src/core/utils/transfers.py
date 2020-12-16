@@ -1,17 +1,16 @@
-# get connection object and cursor object from dbconnector.connector
-# deposit and withdraw money
-# transfer money to other users
 from core.db.connector import get_Cursor, get_DB
 
 
 def deposit(user):
-    "Deposit money to current users acc."
+    """
+    Deposit money to current users acc.
+    """
 
     db = get_DB()
     cursor = get_Cursor()
     money = int(input("Amount to be deposited:"))
     acc = user.accno  # acc is the account no. of the current user
-    balance = int(user.balance[0])
+    balance = int(user.balance)
     balance += money
 
     # in users table
@@ -33,9 +32,11 @@ def deposit(user):
 
 
 def withdraw(user):
-    "Withdraw money from current users acc."
+    """
+    Withdraw money from current users acc.
+    """
 
-    balance = user.balance[0]
+    balance = user.balance
     if balance == 0:  # check for balance
         print("You can't withdraw money.")
         print("Balance: 0")
@@ -70,9 +71,11 @@ def withdraw(user):
 
 
 def transfer(user):
-    "Transfer money to other users"
+    """
+    Transfer money to other users
+    """
 
-    balance = user.balance[0]
+    balance = user.balance
     if balance == 0:  # check for balance
         print("You can't transfer money.")
         print("Balance: 0")
