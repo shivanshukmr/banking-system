@@ -7,10 +7,53 @@ from gui.Assets.assets import colour, font_c, box
 from tkinter import *
 from tkinter import messagebox
 
+def signin(accno):
+    message = Label(self, text="New Account created", bg=colour, fg=font_c)
+    message.grid(row=7, column=1, columnspan=2)
+    acc_l = Label(self, text="Your account number is " + aacno, bg=colour, fg=font_c)
+    acc_l.grid(row=8, column=1, columnspan=2)
+    acc=int(accno)
+    cursor.execute("select firstname from users where accno = %s", (acc,))
+    firstname = cursor.fetchone()
+    cursor.execute("select lastname from users where accno = %s", (acc,))
+    lastname = cursor.fetchone()
+    cursor.execute("select date_created from users where accno = %s", (acc,))
+    datecreated = cursor.fetchone()
+    cursor.execute("select balance from users where accno = %s", (acc,))
+    balance = cursor.fetchone()
+    # return User object
+    return User(acc, firstname, lastname, datecreated, balance)
+    
 #password check function
-def check(a, b):
-    if a == b:
-        return True
+def check(a, b, c, d):
+    cursor = get_Cursor()
+    db = get_DB()
+    if a == "" or b == "" or c == "" or d == "":
+        messagebox.OK("Alert", "Fill up all credentials")
+    else:
+        if c == d:
+            cursor.execute(
+                "insert into users(firstname,lastname,passwd) values(:fname, :lname, :pass),"
+                {
+                    'fname': fname.get(),
+                    'lname': lname.get(),
+                    'pass': passwd.get()
+                }
+            )  
+            db.commit()
+
+            #account number detail
+            cursor.execute("select max(accno) from users;")
+            acc = cursor.fetchone()
+            accno=str(acc[0])
+            signin = Button(self, text="Sign in", command=lambda: signin(accno))
+            signin.grid(row=6, column=1, columnspan=2)
+        else:
+            return messagebox.showerror(
+                "Password authentication", "Password do not match! Try again."
+            )
+
+
 
 def usercreation(self):
     """
@@ -18,10 +61,6 @@ def usercreation(self):
     user gets auto-generated accno.
     """
     import getpass
-
-    cursor = get_Cursor()
-    db = get_DB()
-
     #get details
     fname_l = Label(self, text="Your firstname", bg=colour, fg=font_c)
     lname_l = Label(self, text="Your lastname", bg=colour, fg=font_c)
@@ -50,32 +89,44 @@ def usercreation(self):
     con_pass = confirmpass_e.get()
     
     #Check button
-    if fname=="" or lname=="" or passwd=="" or con_pass=="":
-        check_b = Button(self, text="Done", state=DISABLED)
-        check_b.grid(row=5, column=1, columnspan=2)
+    check_b = Button(
+        self, text="Check", command=lambda: check(fname, lname, passwd, con_pass)
+    )
+    check_b.grid(row=5, column=1, columnspan=2)
+
+    signin = Button(self, text="Sign in", state=DISABLED)
+    signin.grid(row=6, column=1, columnspan=2)
+
+def login(acc):
+    cursor.execute("select firstname from users where accno = %s", (acc,))
+    firstname = cursor.fetchone()
+    cursor.execute("select lastname from users where accno = %s", (acc,))
+    lastname = cursor.fetchone()
+    cursor.execute("select date_created from users where accno = %s", (acc,))
+    datecreated = cursor.fetchone()
+    cursor.execute("select balance from users where accno = %s", (acc,))
+    balance = cursor.fetchone()
+    # return User object
+    return User(acc, firstname, lastname, datecreated, balance)
+
+def authenticate(a, acc, passwd, d):
+    cursor = get_Cursor()
+    cursor.execute("select * from users")  # cursor = get_Cursor()
+    data = cursor.fetchall()
+    if a == "" or acc == "" or passwd == "" or d == "":
+        messagebox.OK("Alert", "Fill up all credentials")
     else:
-        check_b = Button(self, text="Done", command=lambda: check(passwd, con_pass))
-        check_b.grid(row=5, column=1, columnspan=2)
-        if check_b:
-            cursor.execute(
-                "insert into users(firstname,lastname,passwd) values(:fname, :lname, :pass),"
-                {
-                    'fname': fname.get(),
-                    'lname': lname.get(),
-                    'pass': passwd.get()
-                }
-            )  
-            db.commit()
-            message= Label(self, text="New Account created", bg=colour, fg=font_c)
-
-            #account number detail
-            cursor.execute("select max(accno) from users;")
-            acc = cursor.fetchone()
-            accno=str(acc[0])
-            acc_l = Label(self, text="Your account number is " + aacno, bg=colour, fg=font_c)
-        else:
-            messagebox.showerror("Password authentication", "Password do not match! Try again.")
-
+        if passwd == d:
+            for row in data:
+            # checks every record from column 3(accno) with the users input
+            if row[2] == acc and row[3] == passwd:
+                
+                login = Button(self, text="Login", command=lambda: login(acc))
+                login.grid(row=6, column=1, columnspan=2)
+            else:
+                return messagebox.showerror(
+                    "Password authentication", "Password do not match! Try again."
+                )
 
 def userauthentication(self):
     import getpass
@@ -91,36 +142,37 @@ def userauthentication(self):
     cursor.execute("select * from users")  # cursor = get_Cursor()
     data = cursor.fetchall()
 
-    while flag == False:  # user authentication
-    acc = Label(self, text="Enter your account no.", bg=colour, fg=font_c)
-        if acc == 0:
-            break
-        passwd = getpass.getpass("Enter your password:")
+    fname_l = Label(self, text="Your firstname", bg=colour, fg=font_c)
+    accno_l = Label(self, text="Your account number", bg=colour, fg=font_c)
+    passwd_l = Label(self, text="Enter your password", bg=colour, fg=font_c)
+    confirmpass_l = Label(self, text="Confirm password", bg=colour, fg=font_c)
 
-        for row in data:
-            # checks every record from column 3(accno) with the users input
-            if row[2] == acc and row[3] == passwd:
-                flag = True
-                break
-        if flag == False:
-            print("Account no. or the password is wrong. Try again.")
-            print("Press 0 to skip signin")
+    fname_l.grid(row=1, column=0)
+    accno_l.grid(row=2, column=0)
+    passwd_l.grid(row=3, column=0)
+    confirmpass_l.grid(row=4, column=0)
+    
+    fname_e = Entry(self, width=50, bg=box)
+    accno_e = Entry(self, width=50, bg=box)
+    passwd_e = Entry(self, width=50, bg=box)
+    confirmpass_e = Entry(self, width=50, bg=box)
 
-    # returns true if user verified else false
 
-    if flag == True:
-        # get firstname, lastname, datecreated, and balance
-        cursor.execute("select firstname from users where accno = %s", (acc,))
-        firstname = cursor.fetchone()
-        cursor.execute("select lastname from users where accno = %s", (acc,))
-        lastname = cursor.fetchone()
-        cursor.execute("select date_created from users where accno = %s", (acc,))
-        datecreated = cursor.fetchone()
-        cursor.execute("select balance from users where accno = %s", (acc,))
-        balance = cursor.fetchone()
-        # return User object
-        print("You are signed in.")
-        return User(acc, firstname, lastname, datecreated, balance)
+    fname_e.grid(row=1, column=1)
+    accno_e.grid(row=2, column=1)
+    passwd_e.grid(row=3, column=1)
+    confirmpass_e.grid(row=4, column=1)
 
-    if flag == False:
-        return None
+    fname = fname_e.get()
+    lname = accno_e.get()
+    passwd = passwd_e.get()
+    con_pass = confirmpass_e.get()
+    
+    #Check button
+    check_b = Button(
+        self, text="Check", command=lambda: check(fname, lname, passwd, con_pass)
+    )
+    check_b.grid(row=5, column=1, columnspan=2)
+
+    login = Button(self, text="Login", state=DISABLED)
+    login.grid(row=6, column=1, columnspan=2)
