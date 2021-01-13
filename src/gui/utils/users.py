@@ -1,13 +1,15 @@
 # get connection object and cursor object from dbconnector.connector
 # user creation
-# user authentication/signin
+# user authentication/signup
 from core.db.connector import get_Cursor, get_DB
 from core.tables.user import User
 from gui.Assets.assets import colour, font_c, box
 from tkinter import *
 from tkinter import messagebox
 
-def signin(accno):
+
+#===========================create user=====================
+def signup(accno):
     message = Label(self, text="New Account created", bg=colour, fg=font_c)
     message.grid(row=7, column=1, columnspan=2)
     acc_l = Label(self, text="Your account number is " + aacno, bg=colour, fg=font_c)
@@ -28,17 +30,12 @@ def signin(accno):
 def check(a, b, c, d):
     cursor = get_Cursor()
     db = get_DB()
-    if a == "" or b == "" or c == "" or d == "":
-        messagebox.OK("Alert", "Fill up all credentials")
+    if (a == "" or b == "" or c == "" or d == ""):
+        messagebox.OK("Alert", "All fields are required")
     else:
         if c == d:
             cursor.execute(
-                "insert into users(firstname,lastname,passwd) values(:fname, :lname, :pass),"
-                {
-                    'fname': fname.get(),
-                    'lname': lname.get(),
-                    'pass': passwd.get()
-                }
+                "insert into users(firstname,lastname,passwd) values(:fname, :lname, :pass),"{'fname': fname.get(),'lname': lname.get(),'pass': passwd.get()}
             )  
             db.commit()
 
@@ -46,11 +43,11 @@ def check(a, b, c, d):
             cursor.execute("select max(accno) from users;")
             acc = cursor.fetchone()
             accno=str(acc[0])
-            signin = Button(self, text="Sign in", command=lambda: signin(accno))
-            signin.grid(row=6, column=1, columnspan=2)
+            signup = Button(self, text="Sign up", command=lambda: signup(accno))
+            signup.grid(row=6, column=1, columnspan=2)
         else:
             return messagebox.showerror(
-                "Password authentication", "Password do not match! Try again."
+                "Password authentication", "Password does not match! Try again."
             )
 
 
@@ -94,9 +91,10 @@ def usercreation(self):
     )
     check_b.grid(row=5, column=1, columnspan=2)
 
-    signin = Button(self, text="Sign in", state=DISABLED)
-    signin.grid(row=6, column=1, columnspan=2)
+    signup = Button(self, text="Sign up", state=DISABLED)
+    signup.grid(row=6, column=1, columnspan=2)
 
+#==================login====================
 def login(acc):
     cursor.execute("select firstname from users where accno = %s", (acc,))
     firstname = cursor.fetchone()
@@ -114,13 +112,12 @@ def authenticate(a, acc, passwd, d):
     cursor.execute("select * from users")  # cursor = get_Cursor()
     data = cursor.fetchall()
     if a == "" or acc == "" or passwd == "" or d == "":
-        messagebox.OK("Alert", "Fill up all credentials")
+        messagebox.OK("Alert", "All fields required")
     else:
         if passwd == d:
             for row in data:
             # checks every record from column 3(accno) with the users input
             if row[2] == acc and row[3] == passwd:
-                
                 login = Button(self, text="Login", command=lambda: login(acc))
                 login.grid(row=6, column=1, columnspan=2)
             else:
