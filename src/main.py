@@ -22,7 +22,7 @@ initialize_db()
 
 from core.utils.info import balance, details, getusers, transactionHistory
 from core.models.user import User
-from core.utils.users import userauthentication, usercreation, delete
+from core.utils.users import userauthentication, usercreation, delete, updateinfo
 from core.utils.transfers import deposit, withdraw, transfer
 
 user = None
@@ -58,6 +58,8 @@ while True:
             transfer(user)
         elif command == "delete":
             user = delete(user)
+        elif command == "updateinfo":
+            updateinfo(user)
         elif command == "exit":
             break
 

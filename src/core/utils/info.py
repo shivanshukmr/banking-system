@@ -10,7 +10,7 @@ from core.models.transaction import Transaction
 def getusers(user):
     "display other users w/ bankaccout nos."
     cursor = get_Cursor()
-
+    print()
     # acc is the account no. of the current user
     acc = user.accno
     query = "select accno, firstname, lastname from users where accno <> %s" % (acc,)
@@ -25,19 +25,12 @@ def getusers(user):
                 row[2],
             )
         )
+    print()
 
 
 def details(user):
     # "shows firstname, lastname accno. and balance"
-
-    # acc is the account no. of the current user
-    # query = (
-    #    "select accno, firstname, lastname, balance, date_created from users where accno = %s"
-    #    % (acc,)
-    # )
-    # cursor.execute(query)
-    # for row in cursor.fetchall():
-    #    print(row)
+    print()
     date = str(user.datecreated[0])
     print(
         "{:<12} {:<15} {:<15} {:<12} {:<20}".format(
@@ -53,26 +46,22 @@ def details(user):
             date,
         )
     )
+    print()
 
 
 def balance(user):
     # "balance of current user"
-    # from db.connector import *
-    # get_DB()
-    # cursor = get_Cursor()
-
-    # # acc is the account no. of the current user
-    # query = "select balance from users where accno=%s" % (acc,)
-    # cursor.execute(query)
-    # for row in cursor.fetchone():
-    #     print(row)
+    print("")
     print("Your balance:", user.balance[0])
+    print("")
 
 
 def transactionHistory(user):
     """
     Display transaction history of current user
     """
+    print("")
+
     # get all transactions involving current user (recent to oldest)
     cursor = get_Cursor()
     cursor.execute(
@@ -86,6 +75,7 @@ def transactionHistory(user):
 
     if transaction_hist == []:
         print("No Transactions")
+        print()
     else:
         # print transactions
         print(
@@ -95,3 +85,4 @@ def transactionHistory(user):
         )
         for transaction in transaction_hist:
             transaction.print(user)
+    print()

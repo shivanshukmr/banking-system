@@ -4,7 +4,7 @@
 from core.db.connector import get_Cursor, get_DB
 from core.models.user import User
 
-
+# =================registration=================================================================
 def usercreation():
     """
     Gets name, password(twice), and updates db.
@@ -14,7 +14,7 @@ def usercreation():
 
     cursor = get_Cursor()
     db = get_DB()
-
+    print()
     fname = input("Your firstname:")
     lname = input("Your lastname:")
 
@@ -39,12 +39,15 @@ def usercreation():
         (fname, lname, passwd),
     )  # cursor=get_Cursor()
     db.commit()
+    print("")
     print("Created new account.")
     cursor.execute("select max(accno) from users;")
     acc = cursor.fetchone()
     print("Your account number is-", acc[0])
+    print()
 
 
+# ===================login=======================================================================
 def userauthentication():
     import getpass
 
@@ -54,7 +57,7 @@ def userauthentication():
     Gets account no., password and check in db
     returns user object
     """
-
+    print()
     flag = False
     cursor.execute("select * from users")  # cursor = get_Cursor()
     data = cursor.fetchall()
@@ -88,17 +91,87 @@ def userauthentication():
         balance = cursor.fetchone()
         # return User object
         print("You are signed in.")
+        print()
         return User(acc, firstname, lastname, datecreated, balance)
 
     if flag == False:
+        print()
         return None
 
 
+# ============================change detaails====================================================
 def updateinfo(user):
+    import getpass
+
+    print()
     db = get_DB()
     acc = user.accno
+    cursor = get_Cursor()
+    flag = True
+    while flag == True:
+        print("firstname  |  lastname  |  password")
+        print()
+        q = input("What would you like to change from above?")
+        if q == "firstname":
+            fname = input("Your firstname:")
+            query = "update users set firstname = %s where accno=%s"
+            val = (fname, acc)
+            cursor.execute(query, val)
+            db.commit()
+            cursor.execute("select firtname from users where accno = %s", (acc,))
+            firtname = cursor.fetchone()
+            user.lastname[0] = firtname
+            print("firstname would be updated after you signout")
+
+        elif q == "lastname":
+            lname = input("Your lastname:")
+            query = "update users set lastname = %s where accno=%s"
+            val = (lname, acc)
+            cursor.execute(query, val)
+            db.commit()
+            cursor.execute("select lastname from users where accno = %s", (acc,))
+            lastname = cursor.fetchone()
+            user.lastname[0] = lastname
+            print("lastname would be updated after you signout.")
+
+        elif q == "password":
+            query = "select * from users where accno=%s" % (acc)
+            cursor.execute(query)
+            data = cursor.fetchall()
+            cur_pass = getpass.getpass("Enter your current password:")
+            for row in data:
+                # checks every record from column 3(accno) with the users input
+                if row[3] == cur_pass:
+                    flag = True
+                    while flag:  # taking password twice and cnfirming password
+                        passwd = getpass.getpass("Enter new password:")
+                        passwd2 = getpass.getpass("Confirm new password:")
+                        if passwd == passwd2:
+                            print("Password confirmed.")
+                            flag = False
+                        else:
+                            print("Passwords do not match.")
+                            print("Try again.")
+                            flag = True
+                    break
+            if flag == False:
+                query = "update users set passwd = %s where accno=%s" % (
+                    passwd,
+                    acc,
+                )
+                cursor.execute(query)
+                db.commit()
+                print("Password updated")
+        else:
+            print("You didnt choose the correct option")
+        print()
+        question = input("Would you like to change anything else?(yes/no)")
+        if question == "no":
+            flag = False
+    print()
 
 
+# =======================delete account==========================================================
 def delete(user):
     import getpass
 
@@ -109,12 +182,13 @@ def delete(user):
     query = "select * from users where accno=%s" % (acc)
     cursor.execute(query)
     data = cursor.fetchall()
-
+    print()
     print("you're account will be permanently closed")
     confirm = input("Are you sure you want to continue?(yes/no)")
     if confirm == "yes":
         flag = False
         while flag == False:  # user authentication
+            print()
             acc = int(input("Enter your account no.:"))
             if acc == 0:
                 break
@@ -123,14 +197,17 @@ def delete(user):
             for row in data:
                 # checks every record from column 3(accno) with the users input
                 if row[2] == acc and row[3] == passwd:
+                    print()
                     print("Account no. and password confirmed.")
                     flag = True
                     break
             if flag == False:
+                print()
                 print("Account no. or the password is wrong. Try again.")
                 print("Press 0 to cancel")
 
         if flag == True:
+            print()
             confirm2 = input(
                 "The account will now be closed. Press 'enter' to continue or 'c' to cancel."
             )
@@ -139,6 +216,7 @@ def delete(user):
             else:
                 money = user.balance[0]
                 if money != 0:
+                    print()
                     acc2 = int(
                         input(
                             "To which account no. would you like to transfer your money"
@@ -176,16 +254,17 @@ def delete(user):
                             )
                             db.commit()
                             print("Transfered Rs.", money, "to account no.-", acc2)
-                        if a == False:
-                            print("Account no.", acc2, "doesn't exist.")
-                        if a == True:
                             break
-                passwd = "admin"
-                query2 = "update users set passwd = %s where accno=%s" % (
-                    money,
-                    acc,
-                )
-                db.commit
+                    if a == False:
+                        print("Account no.", acc2, "doesn't exist.")
+                else:
+                    print("Balance: 0")
+                val = ("admin", acc)
+                query = "update users set passwd = %s where accno=%s"
+                cursor.execute(query, val)
+                db.commit()
+                print()
                 print("Account has been closed.")
                 print("You are signed out.")
+                print()
                 return None

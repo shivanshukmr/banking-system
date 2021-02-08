@@ -15,19 +15,25 @@ def check_connection(host_, port_, user_, passwd_):
 
 
 def get_mysql_credentials():
+    print("")
     print("\nMySQL login credentials.\n")
     while True:
+        print()
         host_ = input("Enter hostname (default localhost):") or "localhost"
         if host_ == "0":
             sys.exit(0)
+            print()
         port_ = input("Enter port number (default 3306):") or "3306"
         user_ = input("Enter username (default root):") or "root"
         passwd_ = getpass("Enter password:")
 
         if check_connection(host_, port_, user_, passwd_):
+            print()
             print("Successfully connected to MySQL server.")
+            print()
             break
 
+        print()
         print("Unable to connect to MySQL server.\n")
         print("Enter 0 to exit.\n")
 

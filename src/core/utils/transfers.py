@@ -6,7 +6,7 @@ from core.db.connector import get_Cursor, get_DB
 
 def deposit(user):
     "Deposit money to current users acc."
-
+    print("")
     db = get_DB()
     cursor = get_Cursor()
     money = int(input("Amount to be deposited:"))
@@ -30,20 +30,25 @@ def deposit(user):
     user.balance = balance
 
     print("Deposited Rs.", money, "in account-", acc)
+    print("")
 
 
 def withdraw(user):
     "Withdraw money from current users acc."
-
+    print()
     balance = user.balance[0]
     if balance == 0:  # check for balance
+        print()
         print("You can't withdraw money.")
         print("Balance: 0")
+        print()
     else:
         money = int(input("Amount to be withdrawn:"))
         if money > balance:
+            print()
             print("Amount exceeds current balance.")
             print("Can't withdraw.")
+            print()
         else:
             balance -= money
             db = get_DB()
@@ -65,13 +70,13 @@ def withdraw(user):
             cursor.execute("select balance from users where accno = %s", (acc,))
             balance = cursor.fetchone()
             user.balance = balance
-
             print("Withdrew Rs.", money, "from account-", acc)
+            print()
 
 
 def transfer(user):
     "Transfer money to other users"
-
+    print()
     balance = user.balance[0]
     if balance == 0:  # check for balance
         print("You can't transfer money.")
@@ -89,8 +94,10 @@ def transfer(user):
                 a = True
                 money = int(input("Amount to be trasfered:"))
                 if money > balance:
+                    print()
                     print("Amount exceeds current balance.")
                     print("Can't transfer.")
+                    print()
                 else:
                     # in users table
                     query = "update users set balance = balance - %s where accno=%s" % (
@@ -119,7 +126,8 @@ def transfer(user):
                     cursor.execute("select balance from users where accno = %s", (acc,))
                     balance = cursor.fetchone()
                     user.balance = balance
-
                     print("Transfered Rs.", money, "to account no.-", acc2)
+                    print()
         if a == False:
             print("Account no.", acc2, "doesn't exist.")
+            print()
