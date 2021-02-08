@@ -4,7 +4,6 @@ import mysql.connector
 import os.path
 from tkinter import *
 from tkinter import messagebox
-import mysql.connector
 from gui.Assets.assets import box, colour, font_c
 
 

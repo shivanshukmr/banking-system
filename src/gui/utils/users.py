@@ -35,7 +35,7 @@ def check(a, b, c, d):
     else:
         if c == d:
             cursor.execute(
-                "insert into users(firstname,lastname,passwd) values(:fname, :lname, :pass),"{'fname': fname.get(),'lname': lname.get(),'pass': passwd.get()}
+                "insert into users(firstname,lastname,passwd) values{:fname, :lname, :pass}",{'fname': fname.get(),'lname': lname.get(),'pass': passwd.get()}
             )  
             db.commit()
 
@@ -107,19 +107,18 @@ def login(acc):
     # return User object
     return User(acc, firstname, lastname, datecreated, balance)
 
-def authenticate(a, acc, passwd, d):
+def authenticate():
     cursor = get_Cursor()
     cursor.execute("select * from users")  # cursor = get_Cursor()
     data = cursor.fetchall()
-    if a == "" or acc == "" or passwd == "" or d == "":
+    if (fname == "" or accno == "" or passwd == "" or con_pass == ""):
         messagebox.OK("Alert", "All fields required")
     else:
-        if passwd == d:
+        if passwd == con_pass:
             for row in data:
             # checks every record from column 3(accno) with the users input
-            if row[2] == acc and row[3] == passwd:
-                login = Button(self, text="Login", command=lambda: login(acc))
-                login.grid(row=6, column=1, columnspan=2)
+            if (row[2] == accno and row[3] == passwd):
+                login["state"] = "NORMAL"
             else:
                 return messagebox.showerror(
                     "Password authentication", "Password do not match! Try again."
@@ -161,15 +160,23 @@ def userauthentication(self):
     confirmpass_e.grid(row=4, column=1)
 
     fname = fname_e.get()
-    lname = accno_e.get()
+    accno = accno_e.get()
     passwd = passwd_e.get()
     con_pass = confirmpass_e.get()
     
+    
     #Check button
-    check_b = Button(
-        self, text="Check", command=lambda: check(fname, lname, passwd, con_pass)
-    )
-    check_b.grid(row=5, column=1, columnspan=2)
-
     login = Button(self, text="Login", state=DISABLED)
     login.grid(row=6, column=1, columnspan=2)
+
+    global fname
+    global accno
+    global passwd
+    global con_pass
+    global login
+
+    check_b = Button(self, text="Check", command=authenticate())
+    check_b.grid(row=5, column=1, columnspan=2)
+
+    
+

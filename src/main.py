@@ -1,5 +1,6 @@
 from tkinter import *
 from gui.Assets.assets import colour_title, font_title, colour, font_c, icon
+from gui.utils.users import userauthentication
 
 # ======main window=====
 root = Tk()
@@ -23,6 +24,7 @@ version = Label(
 )
 version.grid(row=2, column=1, columnspan=3, sticky=W + E)
 
+
 # ======mysql credentials=====
 
 # ======initialize db=====
@@ -37,6 +39,7 @@ version.grid(row=2, column=1, columnspan=3, sticky=W + E)
 frame2 = Frame(root)
 frame2.configure(bg=colour, bd=2)
 frame2.grid(padx=2, pady=1)
-abel = Label(frame2, text="test", bg=colour, fg=font_c)
-abel.pack()
+label = Label(frame2, text="test", bg=colour, fg=font_c)
+label.pack()
+space1 = Label(frame2, text="", bg=colour).pack()
 root.mainloop()
