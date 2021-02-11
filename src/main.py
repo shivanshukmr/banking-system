@@ -23,7 +23,6 @@ initialize_db()
 
 from core.tables.user import User
 from core.utils.info import balance, details, getusers, transactionHistory
-from core.models.user import User
 from core.utils.users import userauthentication, usercreation, delete, updateinfo
 from core.utils.transfers import deposit, withdraw, transfer
 

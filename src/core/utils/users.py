@@ -118,9 +118,6 @@ def updateinfo(user):
             val = (fname, acc)
             cursor.execute(query, val)
             db.commit()
-            cursor.execute("select firtname from users where accno = %s", (acc,))
-            firtname = cursor.fetchone()
-            user.lastname[0] = firtname
             print("firstname would be updated after you signout")
 
         elif q == "lastname":
@@ -129,9 +126,6 @@ def updateinfo(user):
             val = (lname, acc)
             cursor.execute(query, val)
             db.commit()
-            cursor.execute("select lastname from users where accno = %s", (acc,))
-            lastname = cursor.fetchone()
-            user.lastname[0] = lastname
             print("lastname would be updated after you signout.")
 
         elif q == "password":
