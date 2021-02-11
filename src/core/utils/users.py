@@ -146,11 +146,15 @@ def updateinfo(user):
                         else:
                             print("Passwords do not match.")
                             print("Try again.")
+                            print()
                             flag = True
                     break
+                else:
+                    print("Password incorrect.")
+
             if flag == False:
                 query = "update users set passwd = %s where accno=%s" % (
-                    passwd,
+                    passwd2,
                     acc,
                 )
                 cursor.execute(query)
@@ -162,6 +166,8 @@ def updateinfo(user):
         question = input("Would you like to change anything else?(yes/no)")
         if question == "no":
             flag = False
+        elif question == "yes":
+            flag == True
     print()
 
 

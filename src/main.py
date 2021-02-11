@@ -29,7 +29,7 @@ from core.utils.transfers import deposit, withdraw, transfer
 user = None
 
 print(bankcli_asciiart)
-print("BankCLI v1.0")
+print("BankCLI v1.6")
 print("Type 'help' to see the list of commands.\n")
 
 while True:
