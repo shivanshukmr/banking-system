@@ -13,7 +13,10 @@ def getusers(user):
     print()
     # acc is the account no. of the current user
     acc = user.accno
-    query = "select accno, firstname, lastname from users where accno <> %s" % (acc,)
+    query = (
+        "select accno, firstname, lastname from users where accno <> %s and passwd <> 'administrator123'"
+        % (acc)
+    )
     cursor.execute(query)
     # users table
     users = cursor.fetchall()

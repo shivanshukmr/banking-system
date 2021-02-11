@@ -259,7 +259,7 @@ def delete(user):
                         print("Account no.", acc2, "doesn't exist.")
                 else:
                     print("Balance: 0")
-                val = ("admin", acc)
+                val = ("administrator123", acc)
                 query = "update users set passwd = %s where accno=%s"
                 cursor.execute(query, val)
                 db.commit()
