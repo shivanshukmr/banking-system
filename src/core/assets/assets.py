@@ -16,6 +16,7 @@ Commands:
     balance                 : Show current balance
     transactionhistory      : Show transaction history
     showusers               : Show other accounts
+    updateinfo              : Change account details or password
     delete                  : Delete account
     signout                 : Signout
     exit                    : Exit

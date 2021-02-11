@@ -4,7 +4,7 @@
 # display balance
 # display transaction history(current user)
 from core.db.connector import get_Cursor
-from core.models.transaction import Transaction
+from core.tables.transaction import Transaction
 
 
 def getusers(user):
@@ -16,15 +16,19 @@ def getusers(user):
     query = "select accno, firstname, lastname from users where accno <> %s" % (acc,)
     cursor.execute(query)
     # users table
-    print("{:<12} {:<15} {:<15}".format("Account no.", "Firstname", "Lastname"))
-    for row in cursor.fetchall():
-        print(
-            "{:<12} {:<15} {:<15}".format(
-                row[0],
-                row[1],
-                row[2],
+    users = cursor.fetchall()
+    if users == []:
+        print("No users")
+    else:
+        print("{:<12} {:<15} {:<15}".format("Account no.", "Firstname", "Lastname"))
+        for row in users:
+            print(
+                "{:<12} {:<15} {:<15}".format(
+                    row[0],
+                    row[1],
+                    row[2],
+                )
             )
-        )
     print()
 
 

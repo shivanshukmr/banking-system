@@ -1,4 +1,5 @@
 import os.path
+
 from core.utils.mysqllogin import check_connection, get_mysql_credentials
 
 credentials_path = os.path.join(
@@ -20,6 +21,7 @@ from core.db.initialize import initialize_db
 
 initialize_db()
 
+from core.tables.user import User
 from core.utils.info import balance, details, getusers, transactionHistory
 from core.models.user import User
 from core.utils.users import userauthentication, usercreation, delete, updateinfo
@@ -62,7 +64,6 @@ while True:
             updateinfo(user)
         elif command == "exit":
             break
-
     else:
         # not signed in
         if command == "help":

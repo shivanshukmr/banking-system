@@ -2,7 +2,7 @@
 # user creation
 # user authentication/signin
 from core.db.connector import get_Cursor, get_DB
-from core.models.user import User
+from core.tables.user import User
 
 # =================registration=================================================================
 def usercreation():
