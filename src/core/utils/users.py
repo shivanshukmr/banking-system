@@ -1,6 +1,3 @@
-# get connection object and cursor object from dbconnector.connector
-# user creation
-# user authentication/signin
 from core.db.connector import get_Cursor, get_DB
 from core.tables.user import User
 

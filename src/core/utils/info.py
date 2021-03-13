@@ -1,8 +1,3 @@
-# get connection object and cursor object from dbconnector.connector
-# display other users w/ bankaccout nos.
-# display your account info
-# display balance
-# display transaction history(current user)
 from core.db.connector import get_Cursor
 from core.tables.transaction import Transaction
 
