@@ -63,7 +63,7 @@ def balance(user):
     print("")
 
 
-def transactionHistory(user):
+def transaction_history(user):
     """
     Display transaction history of current user
     """
