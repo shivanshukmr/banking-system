@@ -1,3 +1,5 @@
+import getpass
+
 from core.db.connector import get_Cursor, get_DB
 from core.tables.user import User
 
@@ -7,7 +9,6 @@ def usercreation():
     Gets name, password(twice), and updates db.
     user gets auto-generated accno.
     """
-    import getpass
 
     cursor = get_Cursor()
     db = get_DB()
@@ -46,8 +47,6 @@ def usercreation():
 
 # ===================login=======================================================================
 def userauthentication():
-    import getpass
-
     cursor = get_Cursor()
 
     """
@@ -98,8 +97,6 @@ def userauthentication():
 
 # ============================change detaails====================================================
 def updateinfo(user):
-    import getpass
-
     print()
     db = get_DB()
     acc = user.accno
@@ -170,8 +167,6 @@ def updateinfo(user):
 
 # =======================delete account==========================================================
 def delete(user):
-    import getpass
-
     db = get_DB()
     acc = user.accno
 
