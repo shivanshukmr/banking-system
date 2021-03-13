@@ -1,6 +1,3 @@
 optional:
-    - initial setup to configure host, user, password, etc for mysql
     - admin user that can see all transaction histories
-    - ability to change password
-    - delete user
     - store salted and hashed passwords
