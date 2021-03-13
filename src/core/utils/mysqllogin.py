@@ -6,9 +6,7 @@ import sys
 
 def check_connection(host_, port_, user_, passwd_):
     try:
-        con = mysql.connector.connect(
-            host=host_, port=port_, user=user_, passwd=passwd_
-        )
+        mysql.connector.connect(host=host_, port=port_, user=user_, passwd=passwd_)
         return True
     except Exception:
         return False
@@ -22,7 +20,6 @@ def get_mysql_credentials():
         host_ = input("Enter hostname (default localhost):") or "localhost"
         if host_ == "0":
             sys.exit(0)
-            print()
         port_ = input("Enter port number (default 3306):") or "3306"
         user_ = input("Enter username (default root):") or "root"
         passwd_ = getpass("Enter password:")
